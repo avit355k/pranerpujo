@@ -15,6 +15,9 @@ const pandelRoutes = require('./routes/pandel');
 const themeRoutes = require('./routes/theme');
 const artistRoutes = require('./routes/Artists');
 const directionRoutes =require('./routes/map');
+const adminRoutes = require('./routes/Admin');
+
+app.use("/api/admin", adminRoutes);
 // Use Routes
 app.use("/api/pandel", pandelRoutes);
 app.use("/api/theme", themeRoutes);
