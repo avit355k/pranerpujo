@@ -94,6 +94,36 @@ router.get("/", async (req, res) => {
       .json({ message: "Error fetching pandels", error: error.message });
   }
 });
+// Place this ABOVE router.get("/:id") to avoid route conflicts
+router.get("/search", async (req, res) => {
+  try {
+    const { query } = req.query;
+
+    if (!query || query.trim() === "") {
+      return res.status(200).json([]); // return empty array if query is empty
+    }
+
+    // Escape regex special characters to prevent MongoDB errors
+    const safeQuery = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+    // Case-insensitive partial match on 'name' field
+    const pandels = await Pandel.find({
+      name: { $regex: safeQuery, $options: "i" },
+    })
+      .select("name location zone type logo") // limit fields for performance
+      .limit(10)
+      .sort({ name: 1 });
+
+    return res.status(200).json(pandels);
+  } catch (error) {
+    console.error("Error searching pandels:", error);
+    return res.status(500).json({
+      message: "Error searching pandels",
+      error: error.message,
+    });
+  }
+});
+
 //GET single Pandel by ID
 router.get("/:id", async (req, res) => {
   try {
@@ -210,4 +240,5 @@ router.get("/type/:type", async (req, res) => {
     res.status(500).json({ message: "Error fetching type-wise pandels", error: error.message });
   }
 });
+
 module.exports = router;

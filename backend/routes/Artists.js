@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
 const Artist = require("../model/artists");
 const Pandel = require("../model/pandels");
 const Theme = require("../model/theme");
@@ -23,7 +24,6 @@ router.post("/create", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 });
-
 
 // ✅ Get all artists
 router.get("/", async (req, res) => {
@@ -82,28 +82,57 @@ router.delete("/:id", async (req, res) => {
 router.post("/:id/work", async (req, res) => {
   try {
     const { year, pandel, theme, description } = req.body;
+    const artistId = req.params.id;
 
     if (!year || !pandel || !theme) {
       return res.status(400).json({ message: "Year, pandel, and theme are required" });
     }
 
-    const artist = await Artist.findById(req.params.id);
-    if (!artist) {
-      return res.status(404).json({ message: "Artist not found" });
+    // ✅ Validate ObjectId format
+    if (!mongoose.Types.ObjectId.isValid(artistId)) {
+      return res.status(400).json({ message: "Invalid artist ID" });
+    }
+    if (!mongoose.Types.ObjectId.isValid(pandel)) {
+      return res.status(400).json({ message: "Invalid pandel ID" });
+    }
+    if (!mongoose.Types.ObjectId.isValid(theme)) {
+      return res.status(400).json({ message: "Invalid theme ID" });
     }
 
+    const artist = await Artist.findById(artistId);
+    if (!artist) return res.status(404).json({ message: "Artist not found" });
+
     const existingPandel = await Pandel.findById(pandel);
+    if (!existingPandel) return res.status(404).json({ message: "Pandel not found" });
+
     const existingTheme = await Theme.findById(theme);
-    if (!existingPandel || !existingTheme) {
-      return res.status(404).json({ message: "Pandel or Theme not found" });
-    }
+    if (!existingTheme) return res.status(404).json({ message: "Theme not found" });
 
     artist.works.push({ year, pandel, theme, description });
     await artist.save();
 
-    res.status(200).json({ message: "Work added to artist", artist });
+    res.status(200).json({
+      message: "Work added to artist successfully",
+      artist,
+    });
   } catch (error) {
     console.error("Error adding work:", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+      error: error.message,
+    });
+  }
+});
+//  Search artists by name
+router.get("/search/:query", async (req, res) => {
+  try {
+    const { query } = req.params;
+    const artists = await Artist.find({
+      name: { $regex: query, $options: "i" },
+    }).limit(10);
+    res.status(200).json(artists);
+  } catch (error) {
+    console.error("Error searching artists:", error);
     res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 });

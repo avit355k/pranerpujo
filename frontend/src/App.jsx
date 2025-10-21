@@ -50,7 +50,7 @@ const App = () => {
         <Route path="/schedule" exact={true} element={<Schedule />} />
         <Route path="/admin/login" exact={true} element={<AdminLogin />} />
         <Route path="/admin/signup" exact={true} element={<AdminSignUp />} />
-        <Route path="/admin/signup" exact={true} element={<AdminDashboard />} />
+        <Route path="/admin/dashboard" exact={true} element={<AdminDashboard />} />
       </Routes>
       <Footer />
     </BrowserRouter>

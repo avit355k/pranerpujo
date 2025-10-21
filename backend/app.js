@@ -14,6 +14,7 @@ app.use(express.json());
 const pandelRoutes = require('./routes/pandel');
 const themeRoutes = require('./routes/theme');
 const artistRoutes = require('./routes/Artists');
+const GalleryRoutes = require('./routes/Gallery');
 const directionRoutes =require('./routes/map');
 const adminRoutes = require('./routes/Admin');
 
@@ -22,6 +23,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/pandel", pandelRoutes);
 app.use("/api/theme", themeRoutes);
 app.use("/api/artist", artistRoutes);
+app.use("/api/gallery", GalleryRoutes);
 app.use("/api/map",directionRoutes);
 
 // Server Start
