@@ -20,9 +20,7 @@ import BehalaParikrama from './pages/Parikrama/BehalaParikrama'
 import Haridevpur from './pages/Parikrama/HaridevpurParikrama';
 import SaltLakeParikrama from './pages/Parikrama/SaltLakeParikrama';
 import BonediBariParikrama from './pages/Parikrama/BonediBariParikrama';
-import AdminLogin from './pages/Admin/LogIn';
-import AdminSignUp from './pages/Admin/SignUp';
-import AdminDashboard from './pages/Admin/Dashboard';
+
 
 const App = () => {
 
@@ -48,9 +46,6 @@ const App = () => {
         <Route path="/gallery/:Committees/videos" exact={true} element={<CommitteeVideoGallery />} />
         <Route path="/awards" exact={true} element={<Awards />} />
         <Route path="/schedule" exact={true} element={<Schedule />} />
-        <Route path="/admin/login" exact={true} element={<AdminLogin />} />
-        <Route path="/admin/signup" exact={true} element={<AdminSignUp />} />
-        <Route path="/admin/dashboard" exact={true} element={<AdminDashboard />} />
       </Routes>
       <Footer />
     </BrowserRouter>

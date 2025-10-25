@@ -94,7 +94,7 @@ const AddTheme = () => {
           className="p-2 border rounded-lg dark:bg-neutral-900 w-full"
         />
 
-        <input
+        <textarea 
           type="text"
           name="concept"
           placeholder="Theme Concept"

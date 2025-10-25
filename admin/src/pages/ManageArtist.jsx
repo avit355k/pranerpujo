@@ -2,23 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import EditArtist from "../component/Artist/EditArtists";
 import AddWorkDetails from "../component/Artist/AddWorkDetails";
-
-import {
-  Box,
-  CircularProgress,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  IconButton,
-  TextField,
-  Autocomplete,
-  Paper,
-  Tooltip,
-} from "@mui/material";
-
-import { Delete, Edit, Work } from "@mui/icons-material";
+import { FiEdit, FiTrash2 } from "react-icons/fi";
+import { MdWork } from "react-icons/md";
 
 const ManageArtist = () => {
   const [artists, setArtists] = useState([]);
@@ -26,7 +11,6 @@ const ManageArtist = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // For switching tabs
   const [activeTab, setActiveTab] = useState(null); // "edit" or "AddWork"
   const [artistIdToEdit, setArtistIdToEdit] = useState(null);
   const [artistIdToAddWork, setArtistIdToAddWork] = useState(null);
@@ -54,7 +38,6 @@ const ManageArtist = () => {
     }
   };
 
-  // Live search
   const handleSearch = async (query) => {
     setSearchQuery(query);
 
@@ -73,19 +56,16 @@ const ManageArtist = () => {
     }
   };
 
-  // Handle Edit
   const handleEdit = (id) => {
     setArtistIdToEdit(id);
     setActiveTab("edit");
   };
 
-  // Handle Add Work
   const handleAddWork = (id) => {
     setArtistIdToAddWork(id);
     setActiveTab("AddWork");
   };
 
-  // Back to list
   const handleBackToList = () => {
     setActiveTab(null);
     setArtistIdToEdit(null);
@@ -97,101 +77,93 @@ const ManageArtist = () => {
     fetchArtists();
   }, []);
 
-  // Dark/neutral color styling
-  const tableBg = "#1e1e1e";
-  const tableHeaderBg = "#2e2e2e";
-  const tableHeaderColor = "#e0e0e0";
-  const tableRowColor = "#f0f0f0";
-
   return (
-    <>
-      
-
+    <div className="">
       {!activeTab && (
-        
-        <Box sx={{ pt:0, pb: 4, px: 2 }}>
-          <h2 className="text-xl text-emerald-600 font-bold mb-2 ">Manage Artists</h2>
-          {/* Search box */}
-          <Autocomplete
-            freeSolo
-            options={searchResults.map((a) => a.name)}
-            inputValue={searchQuery}
-            onInputChange={(e, value) => handleSearch(value)}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Search Artist"
-                variant="outlined"
-                fullWidth
-                sx={{ mb: 3, maxWidth: 400 }}
-              />
-            )}
-          />
+        <>
+          <h2 className="text-2xl font-semibold text-emerald-500 mb-4">Manage Artists</h2>
 
+          {/* Search Bar */}
+          <div className="mb-4">
+            <input
+              type="text"
+              placeholder="Search Artist..."
+              value={searchQuery}
+              onChange={(e) => handleSearch(e.target.value)}
+              className="px-4 py-2 w-full sm:w-96 rounded-md bg-emerald-50 text-black dark:bg-neutral-800 dark:text-emerald-50 border border-gray-700 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+            />
+          </div>
+
+          {/* Loading Spinner */}
           {loading ? (
-            <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
-              <CircularProgress />
-            </Box>
+            <div className="flex justify-center py-6">
+              <div className="loader border-4 border-gray-700 border-t-emerald-500 rounded-full w-8 h-8 animate-spin"></div>
+            </div>
           ) : artists.length === 0 ? (
-            <p>No artists found.</p>
+            <p className="text-gray-400">No artists found.</p>
           ) : (
-            <Paper
-              sx={{
-                overflow: "hidden",
-                borderRadius: 3,
-                boxShadow: 3,
-                backgroundColor: tableBg,
-              }}
-            >
-              <Table>
-                <TableHead>
-                  <TableRow sx={{ backgroundColor:  "##009966"  }}>
-                    <TableCell sx={{color: "white", fontWeight: "bold" }}>ID</TableCell>
-                    <TableCell sx={{ color: "white", fontWeight: "bold" }}>Name</TableCell>
-                    <TableCell sx={{color: "white", fontWeight: "bold" }}>Role</TableCell>
-                    <TableCell sx={{ color: "white", fontWeight: "bold" }}>Actions</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
+            <div className="overflow-x-auto bg-white dark:bg-neutral-800 rounded-lg shadow-md border border-gray-800">
+              <table className="w-full border-collapse">
+                <thead className="bg-emerald-700 text-left text-gray-100">
+                  <tr>
+                    <th className="py-3 px-4">ID</th>
+                    <th className="py-3 px-4">Name</th>
+                    <th className="py-3 px-4">Role</th>
+                    <th className="py-3 px-4 text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
                   {artists.map((artist) => (
-                    <TableRow key={artist._id} hover sx={{ color: tableRowColor }}>
-                      <TableCell sx={{ color: tableRowColor }}>{artist._id}</TableCell>
-                      <TableCell sx={{ color: tableRowColor }}>{artist.name}</TableCell>
-                      <TableCell sx={{ color: tableRowColor }}>{artist.role}</TableCell>
-                      <TableCell>
-                        <Tooltip title="Edit">
-                          <IconButton color="primary" onClick={() => handleEdit(artist._id)}>
-                            <Edit />
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Add Work">
-                          <IconButton color="success" onClick={() => handleAddWork(artist._id)}>
-                            <Work />
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Delete">
-                          <IconButton color="error" onClick={() => handleDelete(artist._id)}>
-                            <Delete />
-                          </IconButton>
-                        </Tooltip>
-                      </TableCell>
-                    </TableRow>
+                    <tr
+                      key={artist._id}
+                      className="border-b border-gray-800 hover:bg-emerald-100 dark:hover:bg-neutral-900 transition-colors"
+                    >
+                      <td className="py-3 px-4 text-black dark:text-white">{artist._id}</td>
+                      <td className="py-3 px-4 text-black dark:text-white">{artist.name}</td>
+                      <td className="py-3 px-4 text-black dark:text-white">{artist.role}</td>
+                      <td className="py-3 px-4 text-center flex justify-center gap-3">
+                        <button
+                          onClick={() => handleEdit(artist._id)}
+                          className="p-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition"
+                          title="Edit"
+                        >
+                          <FiEdit className="text-white cursor-pointer" />
+                        </button>
+
+                        <button
+                          onClick={() => handleAddWork(artist._id)}
+                          className="p-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 transition"
+                          title="Add Work"
+                        >
+                          <MdWork className="text-white cursor-pointer" />
+                        </button>
+
+                        <button
+                          onClick={() => handleDelete(artist._id)}
+                          className="p-2 rounded-lg bg-red-600 hover:bg-red-700 transition"
+                          title="Delete"
+                        >
+                          <FiTrash2 className="text-white cursor-pointer" />
+                        </button>
+                      </td>
+                    </tr>
                   ))}
-                </TableBody>
-              </Table>
-            </Paper>
+                </tbody>
+              </table>
+            </div>
           )}
-        </Box>
+        </>
       )}
 
-      {/* Conditional rendering of Edit/AddWork */}
+      {/* Conditional Rendering for Edit/AddWork */}
       {activeTab === "edit" && artistIdToEdit && (
         <EditArtist artistIdToEdit={artistIdToEdit} onBack={handleBackToList} />
       )}
+
       {activeTab === "AddWork" && artistIdToAddWork && (
         <AddWorkDetails artistIdToAddWork={artistIdToAddWork} onBack={handleBackToList} />
       )}
-    </>
+    </div>
   );
 };
 

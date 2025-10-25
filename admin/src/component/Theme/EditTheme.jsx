@@ -111,7 +111,7 @@ const EditTheme = ({ themeIdToEdit, onBack }) => {
 
   return (
     <div className="bg-white dark:bg-neutral-800 p-6 rounded-xl shadow-lg mx-auto">
-      <h2 className="text-2xl font-semibold mb-6 text-emerald-500">Edit Theme</h2>
+      <h2 className="text-2xl font-semibold mb-6 text-emerald-500">Edit Theme</h2> 
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
@@ -121,17 +121,17 @@ const EditTheme = ({ themeIdToEdit, onBack }) => {
           value={formData.title}
           onChange={handleChange}
           required
-          className="p-2 border rounded-lg bg-gray-800 w-full"
+          className="p-2 border rounded-lg dark:bg-neutral-900 w-full"
         />
 
-        <input
+        <textarea
           type="text"
           name="concept"
           placeholder="Theme Concept"
           value={formData.concept}
           onChange={handleChange}
           required
-          className="p-2 border rounded-lg bg-gray-800 w-full"
+          className="p-2 border rounded-lg dark:bg-neutral-900 w-full"
         />
 
         <input
@@ -141,7 +141,7 @@ const EditTheme = ({ themeIdToEdit, onBack }) => {
           value={formData.year}
           onChange={handleChange}
           required
-          className="p-2 border rounded-lg bg-gray-800 w-full"
+          className="p-2 border rounded-lg dark:bg-neutral-900 w-full"
         />
 
         <input
@@ -151,14 +151,14 @@ const EditTheme = ({ themeIdToEdit, onBack }) => {
           value={formData.pandel}
           onChange={handleChange}
           required
-          className="p-2 border rounded-lg bg-gray-800 w-full"
+          className="p-2 border rounded-lg dark:bg-neutral-900 w-full"
         />
 
         {/* Artists */}
         <div>
           <h3 className="text-lg font-medium text-emerald-500 mb-2">Artists</h3>
           {formData.artists.map((artistObj, index) => (
-            <div key={index} className="mb-4 border p-2 rounded-lg space-y-2 bg-gray-800">
+            <div key={index} className="mb-4 border p-2 rounded-lg space-y-2 dark:bg-neutral-900">
 
               {/* Show artist name for info, edit ID in input */}
               <input
@@ -171,7 +171,7 @@ const EditTheme = ({ themeIdToEdit, onBack }) => {
                   updatedArtists[index].artist = { _id: e.target.value }; // preserve as object
                   setFormData({ ...formData, artists: updatedArtists });
                 }}
-                className="p-2 border rounded-lg bg-gray-700 w-full"
+                className="p-2 border rounded-lg dark:bg-neutral-800 w-full"
               />
               <p className="text-sm text-gray-400">
                 {artistObj.artist?.name || "Unknown Name"} ({artistObj.artist?._id || "ID"})
@@ -181,7 +181,7 @@ const EditTheme = ({ themeIdToEdit, onBack }) => {
                 name="roles"
                 value={artistObj.roles[0]}
                 onChange={(e) => handleChange(e, index, "roles")}
-                className="p-2 border rounded-lg bg-gray-700 w-full"
+                className="p-2 border rounded-lg dark:bg-neutral-900 w-full"
               >
                 <option value="Artist">Artist</option>
                 <option value="Idol Artist">Idol Artist</option>
@@ -192,7 +192,7 @@ const EditTheme = ({ themeIdToEdit, onBack }) => {
                 placeholder="Description"
                 value={artistObj.description}
                 onChange={(e) => handleChange(e, index)}
-                className="p-2 border rounded-lg bg-gray-700 w-full"
+                className="p-2 border rounded-lg dark:bg-neutral-900 w-full"
               />
               {formData.artists.length > 1 && (
                 <button
@@ -218,7 +218,7 @@ const EditTheme = ({ themeIdToEdit, onBack }) => {
           placeholder="YouTube Link"
           value={formData.youtubeLink}
           onChange={handleChange}
-          className="p-2 border rounded-lg bg-gray-800 w-full"
+          className="p-2 border rounded-lg dark:bg-neutral-900 w-full"
         />
 
         {/* Main Image */}
@@ -235,7 +235,7 @@ const EditTheme = ({ themeIdToEdit, onBack }) => {
             type="file"
             accept="image/*"
             onChange={(e) => setMainImageFile(e.target.files[0])}
-            className="p-2 border rounded-lg bg-gray-800 w-full cursor-pointer"
+            className="p-2 border rounded-lg dark:bg-neutral-900 w-full cursor-pointer"
           />
         </div>
         {/* Gallery */}
@@ -248,7 +248,7 @@ const EditTheme = ({ themeIdToEdit, onBack }) => {
             onChange={(e) =>
               setGalleryFiles((prev) => [...prev, ...Array.from(e.target.files)])
             }
-            className="p-2 border rounded-lg bg-gray-800 w-full cursor-pointer mb-2"
+            className="p-2 border rounded-lg dark:bg-neutral-900 w-full cursor-pointer mb-2"
           />
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-2">
@@ -277,13 +277,13 @@ const EditTheme = ({ themeIdToEdit, onBack }) => {
           <button
             type="button"
             onClick={onBack}
-            className="bg-gray-700 text-white p-2 rounded-lg hover:bg-gray-600 flex-1"
+            className="bg-gray-500 text-white p-2 rounded-lg hover:bg-gray-600 flex-1 cursor-pointer"
           >
             Back
           </button>
           <button
             type="submit"
-            className="bg-emerald-500 text-white p-2 rounded-lg hover:bg-emerald-600 flex-1"
+            className="bg-emerald-500 text-white p-2 rounded-lg hover:bg-emerald-600 flex-1 cursor-pointer"
           >
             Update
           </button>

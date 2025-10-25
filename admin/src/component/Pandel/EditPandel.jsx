@@ -134,7 +134,7 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
 
   return (
     <div className="bg-white dark:bg-neutral-800 p-6 rounded-xl shadow-lg mx-auto">
-      <h2 className="text-2xl font-semibold mb-6 text-red-600 text-center">
+      <h2 className="text-2xl font-semibold mb-6 text-emerald-500">
         Edit Pandel Details
       </h2>
 
@@ -235,7 +235,7 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
         />
 
         {/* Nearest Locations */}
-        <h3 className="text-lg font-medium text-red-500 mt-6">
+        <h3 className="text-lg font-medium text-emerald-500 mt-6">
           Nearest Locations
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -266,7 +266,7 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
         </div>
 
         {/* Contact Info */}
-        <h3 className="text-lg font-medium text-red-500 mt-6">
+        <h3 className="text-lg font-medium text-emerald-500 mt-6">
           Contact Information
         </h3>
         <div className="space-y-3">
@@ -283,7 +283,7 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
           <button
             type="button"
             onClick={addContactField}
-            className="text-sm text-red-600 hover:underline"
+            className="text-sm text-emerald-500 hover:underline"
           >
             + Add Another Number
           </button>
@@ -299,7 +299,7 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
         </div>
 
         {/* Social Links */}
-        <h3 className="text-lg font-medium text-red-500 mt-6">
+        <h3 className="text-lg font-medium text-emerald-500 mt-6">
           Social Links
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -345,7 +345,7 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
         <button
           type="submit"
           disabled={loading}
-          className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 w-full font-semibold cursor-pointer"
+          className="bg-emerald-500 text-white px-6 py-2 rounded-lg hover:bg-emerald-600  w-full font-semibold cursor-pointer"
         >
           {loading ? "Updating..." : "Update Pandel"}
         </button>

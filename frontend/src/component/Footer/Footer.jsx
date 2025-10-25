@@ -74,22 +74,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Admin Section */}
-        <div className="flex flex-col items-start sm:items-center lg:items-end justify-between ">
-          <a
-            href="/admin/login"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mb-4"
-          >
-            <button className="bg-red-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-red-700 transition-all duration-300 cursor-pointer">
-              Admin Login
-            </button>
-          </a>
-          <p className="text-xs text-gray-500 dark:text-gray-400 text-center sm:text-left lg:text-right">
-            For Admin use only
-          </p>
-        </div>
+
       </div>
 
       {/* Bottom Footer */}

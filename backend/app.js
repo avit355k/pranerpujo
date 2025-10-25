@@ -17,6 +17,7 @@ const artistRoutes = require('./routes/Artists');
 const GalleryRoutes = require('./routes/Gallery');
 const directionRoutes =require('./routes/map');
 const adminRoutes = require('./routes/Admin');
+const dashboardRoutes = require('./routes/dashboard');
 
 app.use("/api/admin", adminRoutes);
 // Use Routes
@@ -25,6 +26,7 @@ app.use("/api/theme", themeRoutes);
 app.use("/api/artist", artistRoutes);
 app.use("/api/gallery", GalleryRoutes);
 app.use("/api/map",directionRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 
 // Server Start
 // Start Server

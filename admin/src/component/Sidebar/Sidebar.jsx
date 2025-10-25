@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { MdDashboard, MdTempleBuddhist, MdEditDocument } from "react-icons/md";
-import { IoIosArrowForward, IoMdPersonAdd, IoMdCloudUpload } from "react-icons/io";
+import { MdDashboard, MdTempleBuddhist, MdEditDocument, MdManageAccounts } from "react-icons/md";
+import { IoIosArrowForward, IoMdPersonAdd, IoMdCloudUpload, IoMdAddCircle } from "react-icons/io";
 import { GrUserWorker } from "react-icons/gr";
-import { TbBrandAppgallery } from "react-icons/tb";
+import { TbBrandAppgallery, TbEdit, TbPhotoEdit } from "react-icons/tb";
 import { FaPalette } from "react-icons/fa6";
 
 const Sidebar = () => {
@@ -23,10 +23,9 @@ const Sidebar = () => {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `flex items-center gap-3 p-2 rounded-lg transition ${
-                isActive
-                  ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
-                  : "hover:bg-gray-100 dark:hover:bg-gray-700"
+              `flex items-center gap-3 p-2 rounded-lg transition ${isActive
+                ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
+                : "hover:bg-gray-100 dark:hover:bg-gray-700"
               }`
             }
           >
@@ -37,10 +36,9 @@ const Sidebar = () => {
           <NavLink
             to="/addpandals"
             className={({ isActive }) =>
-              `flex items-center gap-3 p-2 rounded-lg transition ${
-                isActive
-                  ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
-                  : "hover:bg-gray-100 dark:hover:bg-gray-700"
+              `flex items-center gap-3 p-2 rounded-lg transition ${isActive
+                ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
+                : "hover:bg-gray-100 dark:hover:bg-gray-700"
               }`
             }
           >
@@ -51,10 +49,9 @@ const Sidebar = () => {
           <NavLink
             to="/managepandals"
             className={({ isActive }) =>
-              `flex items-center gap-3 p-2 rounded-lg transition ${
-                isActive
-                  ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
-                  : "hover:bg-gray-100 dark:hover:bg-gray-700"
+              `flex items-center gap-3 p-2 rounded-lg transition ${isActive
+                ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
+                : "hover:bg-gray-100 dark:hover:bg-gray-700"
               }`
             }
           >
@@ -64,20 +61,18 @@ const Sidebar = () => {
           {/* Artists Section */}
           <button
             onClick={() => setIsArtistOpen(!isArtistOpen)}
-            className={`flex items-center justify-between w-full p-2 rounded-lg transition ${
-              isArtistOpen
+            className={`flex items-center justify-between w-full p-2 rounded-lg transition cursor-pointer ${isArtistOpen
                 ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
                 : "hover:bg-gray-100 dark:hover:bg-gray-700"
-            }`}
+              }`}
           >
             <div className="flex items-center gap-3">
               <GrUserWorker size={20} /> Artists
             </div>
             <IoIosArrowForward
               size={20}
-              className={`transition-transform duration-300 ${
-                isArtistOpen ? "rotate-90" : ""
-              }`}
+              className={`transition-transform duration-300 ${isArtistOpen ? "rotate-90" : ""
+                }`}
             />
           </button>
 
@@ -86,26 +81,24 @@ const Sidebar = () => {
               <NavLink
                 to="/artists/add"
                 className={({ isActive }) =>
-                  `flex items-center gap-3 p-2 rounded-lg text-sm transition ${
-                    isActive
-                      ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
-                      : "hover:bg-gray-100 dark:hover:bg-gray-700"
+                  `flex items-center gap-3 p-2 rounded-lg text-sm transition cursor-pointer ${isActive
+                    ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
+                    : "hover:bg-gray-100 dark:hover:bg-gray-700"
                   }`
                 }
               >
-                <IoMdPersonAdd /> Add Artist
+                <IoMdPersonAdd size={18} /> Add Artist
               </NavLink>
               <NavLink
                 to="/artists/manage"
                 className={({ isActive }) =>
-                  `block p-2 rounded-lg text-sm transition ${
-                    isActive
-                      ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
-                      : "hover:bg-gray-100 dark:hover:bg-gray-700"
+                  `flex items-center gap-3 p-2 rounded-lg text-sm transition cursor-pointer ${isActive
+                    ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
+                    : "hover:bg-gray-100 dark:hover:bg-gray-700"
                   }`
                 }
               >
-                🧾 Manage Artists
+                <MdManageAccounts size={18} /> Manage Artists
               </NavLink>
             </div>
           )}
@@ -113,20 +106,18 @@ const Sidebar = () => {
           {/* Theme Section */}
           <button
             onClick={() => setIsThemeOpen(!isThemeOpen)}
-            className={`flex items-center justify-between w-full p-2 rounded-lg transition ${
-              isThemeOpen
+            className={`flex items-center justify-between w-full p-2 rounded-lg transition cursor-pointer ${isThemeOpen
                 ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
                 : "hover:bg-gray-100 dark:hover:bg-gray-700"
-            }`}
+              }`}
           >
             <div className="flex items-center gap-3">
               <FaPalette size={20} /> Theme
             </div>
             <IoIosArrowForward
               size={20}
-              className={`transition-transform duration-300 ${
-                isThemeOpen ? "rotate-90" : ""
-              }`}
+              className={`transition-transform duration-300 ${isThemeOpen ? "rotate-90" : ""
+                }`}
             />
           </button>
 
@@ -135,26 +126,24 @@ const Sidebar = () => {
               <NavLink
                 to="/themes/add"
                 className={({ isActive }) =>
-                  `block p-2 rounded-lg text-sm transition ${
-                    isActive
-                      ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
-                      : "hover:bg-gray-100 dark:hover:bg-gray-700"
+                  `flex items-center gap-3 p-2 rounded-lg text-sm transition cursor-pointer ${isActive
+                    ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
+                    : "hover:bg-gray-100 dark:hover:bg-gray-700"
                   }`
                 }
               >
-                ➕ Add Theme
+                <IoMdAddCircle size={18} /> Add Theme
               </NavLink>
               <NavLink
                 to="/themes/manage"
                 className={({ isActive }) =>
-                  `block p-2 rounded-lg text-sm transition ${
-                    isActive
-                      ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
-                      : "hover:bg-gray-100 dark:hover:bg-gray-700"
+                  `flex items-center gap-3 p-2 rounded-lg text-sm transition cursor-pointer ${isActive
+                    ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
+                    : "hover:bg-gray-100 dark:hover:bg-gray-700"
                   }`
                 }
               >
-                🧾 Manage Theme
+                <TbEdit size={18} /> Manage Theme
               </NavLink>
             </div>
           )}
@@ -162,20 +151,18 @@ const Sidebar = () => {
           {/* Gallery Section */}
           <button
             onClick={() => setIsGalleryOpen(!isGalleryOpen)}
-            className={`flex items-center justify-between w-full p-2 rounded-lg transition ${
-              isGalleryOpen
+            className={`flex items-center justify-between w-full p-2 rounded-lg transition cursor-pointer ${isGalleryOpen
                 ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
                 : "hover:bg-gray-100 dark:hover:bg-gray-700"
-            }`}
+              }`}
           >
             <div className="flex items-center gap-3">
               <TbBrandAppgallery size={20} /> Gallery
             </div>
             <IoIosArrowForward
               size={20}
-              className={`transition-transform duration-300 ${
-                isGalleryOpen ? "rotate-90" : ""
-              }`}
+              className={`transition-transform duration-300 ${isGalleryOpen ? "rotate-90" : ""
+                }`}
             />
           </button>
 
@@ -184,10 +171,9 @@ const Sidebar = () => {
               <NavLink
                 to="/gallery/upload"
                 className={({ isActive }) =>
-                  `flex items-center gap-3 p-2 rounded-lg text-sm transition ${
-                    isActive
-                      ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
-                      : "hover:bg-gray-100 dark:hover:bg-gray-700"
+                  `flex items-center gap-3 p-2 rounded-lg text-sm transition ${isActive
+                    ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
+                    : "hover:bg-gray-100 dark:hover:bg-gray-700"
                   }`
                 }
               >
@@ -196,14 +182,13 @@ const Sidebar = () => {
               <NavLink
                 to="/gallery/manage"
                 className={({ isActive }) =>
-                  `block p-2 rounded-lg text-sm transition ${
-                    isActive
-                      ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
-                      : "hover:bg-gray-100 dark:hover:bg-gray-700"
+                  `flex items-center gap-3 p-2 rounded-lg text-sm transition cursor-pointer ${isActive
+                    ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-500"
+                    : "hover:bg-gray-100 dark:hover:bg-gray-700"
                   }`
                 }
               >
-                🧾 Manage Gallery
+                <TbPhotoEdit size={18} /> Manage Gallery
               </NavLink>
             </div>
           )}
