@@ -300,8 +300,8 @@ const Map = () => {
             <IoIosSearch
               onClick={handleSearchAddress}
               className={`absolute right-3 top-1/2 -translate-y-1/2 ${loadingAddress
-                  ? "text-gray-400"
-                  : "text-gray-600 dark:text-gray-400"
+                ? "text-gray-400"
+                : "text-gray-600 dark:text-gray-400"
                 } cursor-pointer`}
               size={22}
               title="Search Address"
@@ -386,9 +386,10 @@ const Map = () => {
             }}
           >
             <TileLayer
-              url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png"
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://stadiamaps.com/">Stadia Maps</a>'
+              url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+              attribution='&copy; CARTO &copy; OpenStreetMap contributors'
             />
+
 
             {filteredPandals
               .filter((p) => p.location?.latitude && p.location?.longitude)
