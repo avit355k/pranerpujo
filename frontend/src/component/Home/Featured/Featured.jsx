@@ -7,7 +7,7 @@ import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import PujaCard from "../../Pujacard/PujaCard";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { API } from "../../services/api";
+import { API } from "../../../services/api";
 
 const Featured = () => {
 
