@@ -1,0 +1,69 @@
+# Node dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Logs
+logs
+*.log
+*.log.*
+log.txt
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Build output
+dist/
+build/
+coverage/
+lib/
+.tmp/
+.temp/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE and editor folders
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Docker
+docker-compose.override.yml
+.docker/
+*.dockerfile
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Optional: Prisma or other ORM-related
+prisma/dev.db
+prisma/*.db-journal
+
+# Optional: PM2 logs
+.pm2/
+
+# Optional: Environment configs or secrets
+config/*.local.json
+secrets/
