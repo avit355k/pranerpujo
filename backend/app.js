@@ -12,8 +12,7 @@ app.use(
     origin: [
       "http://localhost:5173",  // frontend local
       "http://localhost:5174",  // admin local
-      // add deployed URLs later
-      // "https://your-frontend-domain.com",
+      "https://pranerpujo.vercel.app",
       // "https://your-admin-domain.com"
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
@@ -27,7 +26,7 @@ const pandelRoutes = require('./routes/pandel');
 const themeRoutes = require('./routes/theme');
 const artistRoutes = require('./routes/Artists');
 const GalleryRoutes = require('./routes/Gallery');
-const directionRoutes =require('./routes/map');
+const directionRoutes = require('./routes/map');
 const adminRoutes = require('./routes/Admin');
 const dashboardRoutes = require('./routes/dashboard');
 const awardRoutes = require('./routes/Awards');
@@ -38,7 +37,7 @@ app.use("/api/pandel", pandelRoutes);
 app.use("/api/theme", themeRoutes);
 app.use("/api/artist", artistRoutes);
 app.use("/api/gallery", GalleryRoutes);
-app.use("/api/map",directionRoutes);
+app.use("/api/map", directionRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/awards", awardRoutes);
 
