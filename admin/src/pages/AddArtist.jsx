@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
+import { API } from "../../services/api";
 
 const AddArtist = () => {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const AddArtist = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/artist/create",
+        `${API}/api/artist/create`,
         formData
       );
 

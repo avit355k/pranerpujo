@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PujaCard from "../../component/Pujacard/PujaCard";
 import { FaSearch } from "react-icons/fa";
 import axios from "axios";
+import { API } from "../../services/api";
 
 const Parikrama = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -13,7 +14,7 @@ const Parikrama = () => {
   useEffect(() => {
     const fetchPandels = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/pandel");
+        const res = await axios.get(`${API}/api/pandel`);
         console.log("Fetched Pandels:", res.data);
         const data = Array.isArray(res.data) ? res.data : [];
         setPandels(data);

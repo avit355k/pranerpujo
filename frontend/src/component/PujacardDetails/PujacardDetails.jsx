@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { API } from "../../services/api";
 
 import { IoLocationSharp } from "react-icons/io5";
 import { FaChevronDown } from "react-icons/fa";
@@ -34,7 +35,7 @@ const PujacardDetails = () => {
   useEffect(() => {
     const fetchPandel = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/pandel/${id}`);
+        const res = await axios.get(`${API}/api/pandel/${id}`);
         setPandel(res.data);
       } catch (err) {
         console.error("Error fetching pandel details:", err);
@@ -52,7 +53,7 @@ const PujacardDetails = () => {
       setThemeLoading(true);
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/theme/pandel/${id}/year/${selectedYear}`
+          `${API}/api/theme/pandel/${id}/year/${selectedYear}`
         );
         setTheme(res.data?.[0] || null);
       } catch (err) {

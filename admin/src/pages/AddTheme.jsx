@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { API } from "../../services/api";
 
 const initialFormData = {
   title: "",
@@ -62,7 +63,7 @@ const AddTheme = () => {
       galleryFiles.forEach((file) => payload.append("galleryFiles", file));
 
       const res = await axios.post(
-        "http://localhost:5000/api/theme/create",
+        `${API}/api/theme/create`,
         payload,
         { headers: { "Content-Type": "multipart/form-data" } }
       );

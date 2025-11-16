@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API } from "../../services/api";
 import EditPandel from "../component/Pandel/EditPandel";
 
 const ManagePandel = () => {
@@ -14,7 +15,7 @@ const ManagePandel = () => {
   // ✅ Fetch all pandels
   const fetchPandels = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/pandel");
+      const res = await axios.get(`${API}/api/pandel`);
       setPandels(res.data);
       setAllPandelsBackup(res.data);
     } catch (err) {
@@ -36,7 +37,7 @@ const ManagePandel = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this pandel?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/pandel/delete/${id}`);
+      await axios.delete(`${API}/api/pandel/delete/${id}`);
       alert("Pandel deleted successfully");
       fetchPandels();
       setInputValue("");
@@ -65,7 +66,7 @@ const ManagePandel = () => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/pandel/search?query=${encodeURIComponent(query)}`
+        `${API}/api/pandel/search?query=${encodeURIComponent(query)}`
       );
       setPandels(res.data);
     } catch (err) {

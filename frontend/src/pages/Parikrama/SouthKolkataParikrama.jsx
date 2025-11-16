@@ -3,6 +3,7 @@ import axios from "axios";
 import PujaCard from "../../component/Pujacard/PujaCard";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import { API } from "../../services/api";
 
 
 const SouthKolkataParikrama = () => {
@@ -16,7 +17,7 @@ const SouthKolkataParikrama = () => {
     const fetchPandels = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:5000/api/pandel/zone/South Kolkata");
+        const res = await axios.get(`${API}/api/pandel/zone/South Kolkata`);
         setPandels(res.data);
       } catch (error) {
         if (error.response?.status === 404) {

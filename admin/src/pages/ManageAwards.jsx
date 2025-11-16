@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API } from "../../services/api";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import { MdPlaylistAdd } from "react-icons/md";
 import EditAwards from "../component/Awards/EditAwards";
@@ -17,7 +18,7 @@ const ManageAwards = () => {
   const fetchAwards = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/awards");
+      const res = await axios.get(`${API}/api/awards`);
       setAwards(res.data);
     } catch (err) {
       console.error("Error fetching awards:", err);
@@ -30,7 +31,7 @@ const ManageAwards = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this award?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/awards/${id}`);
+      await axios.delete(`${API}/api/awards/${id}`);
       fetchAwards();
     } catch (err) {
       console.error("Error deleting award:", err);
@@ -49,7 +50,7 @@ const ManageAwards = () => {
 
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/awards/search/${query}`
+        `${API}/api/awards/search/${query}`
       );
       setAwards(res.data);
     } catch (err) {

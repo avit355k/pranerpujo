@@ -7,6 +7,7 @@ import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import PujaCard from "../../Pujacard/PujaCard";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API } from "../../services/api";
 
 const Featured = () => {
 
@@ -17,7 +18,7 @@ const Featured = () => {
   useEffect(() => {
     const fetchHeritagePandels = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/pandel/heritage");
+        const res = await axios.get(`${API}/api/pandel/heritage`);
         setHeritagePandels(res.data || []);
       } catch (err) {
         console.error("Error fetching heritage pandels:", err);

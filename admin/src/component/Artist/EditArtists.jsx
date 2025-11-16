@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { API } from "../../services/api";
 
 const EditArtists = ({ artistIdToEdit, onBack }) => {
   const [formData, setFormData] = useState({
@@ -15,7 +16,7 @@ const EditArtists = ({ artistIdToEdit, onBack }) => {
   useEffect(() => {
     const fetchArtistDetails = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/artist/${artistIdToEdit}`);
+        const res = await axios.get(`${API}/api/artist/${artistIdToEdit}`);
         if (res.data) {
           setFormData({
             name: res.data.name || "",
@@ -46,7 +47,7 @@ const EditArtists = ({ artistIdToEdit, onBack }) => {
 
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/artist/${artistIdToEdit}`,
+        `${API}/api/artist/${artistIdToEdit}`,
         formData
       );
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import Winnerlist from "../../component/Awards/Winnerlist";
+import { API } from "../../services/api";
 
 const Awards = () => {
   const [awards, setAwards] = useState([]);
@@ -13,7 +14,7 @@ const Awards = () => {
   useEffect(() => {
     const fetchAwards = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/awards");
+        const res = await fetch(`${API}/api/awards`);
         if (!res.ok) throw new Error("Failed to fetch awards");
         const data = await res.json();
         setAwards(data);

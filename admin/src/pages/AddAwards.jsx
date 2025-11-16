@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { API } from "../../services/api";
 
 const AddAwards = () => {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const AddAwards = () => {
     setError("");
 
     try {
-      const res = await axios.post("http://localhost:5000/api/awards", formData, {
+      const res = await axios.post(`${API}/api/awards`, formData, {
         headers: { "Content-Type": "application/json" },
       });
 

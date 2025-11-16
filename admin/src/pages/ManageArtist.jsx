@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API } from "../../services/api";
 import EditArtist from "../component/Artist/EditArtists";
 import AddWorkDetails from "../component/Artist/AddWorkDetails";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
@@ -18,7 +19,7 @@ const ManageArtist = () => {
   const fetchArtists = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/artist");
+      const res = await axios.get(`${API}/api/artist`);
       setArtists(res.data);
     } catch (err) {
       console.error("Error fetching artists:", err);
@@ -30,7 +31,7 @@ const ManageArtist = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this artist?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/artist/${id}`);
+      await axios.delete(`${API}/api/artist/${id}`);
       fetchArtists();
     } catch (err) {
       console.error("Error deleting artist:", err);
@@ -48,7 +49,7 @@ const ManageArtist = () => {
     }
 
     try {
-      const res = await axios.get(`http://localhost:5000/api/artist/search/${query}`);
+      const res = await axios.get(`${API}/api/artist/search/${query}`);
       setSearchResults(res.data);
       setArtists(res.data);
     } catch (err) {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API } from "../../services/api";
 import EditGallery from "../component/Gallery/EditGallery";
 
 const ManageGallery = () => {
@@ -12,7 +13,7 @@ const ManageGallery = () => {
   const fetchGalleries = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/gallery/all");
+      const res = await axios.get(`${API}/api/gallery/all`);
       setGalleries(res.data);
     } catch (err) {
       console.error("Error fetching galleries:", err);
@@ -29,7 +30,7 @@ const ManageGallery = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this gallery?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/gallery/${id}`);
+      await axios.delete(`${API}/api/gallery/${id}`);
       setGalleries((prev) => prev.filter((g) => g._id !== id));
       alert("Gallery deleted successfully!");
     } catch (err) {

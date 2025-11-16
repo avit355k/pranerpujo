@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API } from "../../services/api";
 
 const EditTheme = ({ themeIdToEdit, onBack }) => {
   const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ const EditTheme = ({ themeIdToEdit, onBack }) => {
     const fetchTheme = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`http://localhost:5000/api/theme/all`);
+        const res = await axios.get(`${API}/api/theme/all`);
         const theme = res.data.find((t) => t._id === themeIdToEdit);
         if (!theme) {
           alert("Theme not found");
@@ -95,7 +96,7 @@ const EditTheme = ({ themeIdToEdit, onBack }) => {
         .filter((f) => f instanceof File)
         .forEach((file) => payload.append("galleryFiles", file));
 
-      await axios.put(`http://localhost:5000/api/theme/${themeIdToEdit}`, payload, {
+      await axios.put(`${API}/api/theme/${themeIdToEdit}`, payload, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

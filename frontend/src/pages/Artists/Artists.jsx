@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaAngleUp } from "react-icons/fa";
+import { API } from "../../services/api";
 
 const Artists = () => {
   const [artists, setArtists] = useState([]);
@@ -13,8 +14,8 @@ const Artists = () => {
     try {
       const url =
         query.trim() === ""
-          ? "http://localhost:5000/api/artist"
-          : `http://localhost:5000/api/artist/search/${query}`;
+          ? `${API}/api/artist`
+          : `${API}/api/artist/search/${query}`;
       const res = await fetch(url);
       const data = await res.json();
       setArtists(data);

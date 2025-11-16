@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API } from "../../services/api";
 import Select from "react-select"; // ✅ Import react-select
 
 const AddWinners = ({ awardId, onBack }) => {
@@ -16,8 +17,8 @@ const AddWinners = ({ awardId, onBack }) => {
     const fetchData = async () => {
       try {
         const [awardRes, pandelRes] = await Promise.all([
-          axios.get(`http://localhost:5000/api/awards/${awardId}`),
-          axios.get("http://localhost:5000/api/pandel"),
+          axios.get(`${API}/api/awards/${awardId}`),
+          axios.get(`${API}/api/pandel`),
         ]);
         setAward(awardRes.data);
         setPandels(
@@ -43,7 +44,7 @@ const AddWinners = ({ awardId, onBack }) => {
     setSaving(true);
     try {
       await axios.post(
-        `http://localhost:5000/api/awards/${awardId}/yearwise`,
+        `${API}/api/awards/${awardId}/yearwise`,
         {
           year: parseInt(formData.year),
           pandels: formData.pandels.map((p) => p.value), // ✅ Send only IDs

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { TbVideo } from "react-icons/tb";
 import GalleryCard from '../../component/GalleryCard/GalleryCard'
 import axios from "axios";
+import { API } from "../../services/api";
 
 const VideoGallery = () => {
   const [pandels, setPandels] = useState([]);
@@ -12,7 +13,7 @@ const VideoGallery = () => {
   useEffect(() => {
     const fetchPandels = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/pandel");
+        const res = await axios.get(`${API}/api/pandel`);
         const data = Array.isArray(res.data) ? res.data : [];
         setPandels(data);
       } catch (error) {

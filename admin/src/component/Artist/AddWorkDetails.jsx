@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { API } from "../../services/api";
 
 const AddWorkDetails = ({ artistIdToAddWork, onBack }) => {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const AddWorkDetails = ({ artistIdToAddWork, onBack }) => {
 
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/artist/${artistIdToAddWork}/work`,
+        `${API}/api/artist/${artistIdToAddWork}/work`,
         formData
       );
 

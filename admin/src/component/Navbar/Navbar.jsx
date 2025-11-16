@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"; // ✅ useNavigate is impo
 import { FiSearch } from "react-icons/fi";
 import { LightMode, DarkMode } from "@mui/icons-material";
 import axios from "axios";
+import { API } from "../../services/api";
 
 const Navbar = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -27,7 +28,7 @@ const Navbar = () => {
         const token = localStorage.getItem("adminToken");
         if (!token) return;
 
-        const res = await axios.get("http://localhost:5000/api/admin/profile", {
+        const res = await axios.get(`${API}/api/admin/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

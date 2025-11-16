@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API } from "../../services/api";
 import { IoLocationSharp } from "react-icons/io5";
 
 const CommiteePhotoGallery = () => {
@@ -15,7 +16,7 @@ const CommiteePhotoGallery = () => {
   useEffect(() => {
     const fetchPandel = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/pandel/${id}`);
+        const res = await axios.get(`${API}/api/pandel/${id}`);
         setPandel(res.data);
       } catch (err) {
         console.error("Error fetching pandel details:", err);
@@ -33,7 +34,7 @@ const CommiteePhotoGallery = () => {
       for (const year of galleryYears) {
         try {
           const res = await axios.get(
-            `http://localhost:5000/api/theme/pandel/${id}/year/${year}`
+            `${API}/api/theme/pandel/${id}/year/${year}`
           );
           const theme = res.data?.[0];
           newThemeImages[year] =

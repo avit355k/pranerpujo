@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API } from "../../services/api";
 import Select from "react-select";
 
 const EditAwards = ({ awardIdToEdit, onBack }) => {
@@ -15,7 +16,7 @@ const EditAwards = ({ awardIdToEdit, onBack }) => {
 
   // Fetch pandels for searchable dropdown
   const fetchPandels = async () => {
-    const res = await axios.get("http://localhost:5000/api/pandel");
+    const res = await axios.get(`${API}/api/pandel`);
     const formatted = res.data.map((p) => ({
       value: p._id,
       label: p.name,
@@ -27,7 +28,7 @@ const EditAwards = ({ awardIdToEdit, onBack }) => {
   const fetchAward = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/awards/${awardIdToEdit}`
+        `${API}/api/awards/${awardIdToEdit}`
       );
       const { awardName, logo, winners } = res.data;
       setFormData({ awardName, logo });
@@ -49,7 +50,7 @@ const EditAwards = ({ awardIdToEdit, onBack }) => {
     e.preventDefault();
     setSaving(true);
     try {
-      await axios.put(`http://localhost:5000/api/awards/${awardIdToEdit}`, formData);
+      await axios.put(`${API}/api/awards/${awardIdToEdit}`, formData);
       alert("Award updated successfully!");
       onBack();
     } catch (err) {
@@ -63,7 +64,7 @@ const EditAwards = ({ awardIdToEdit, onBack }) => {
   const updateWinner = async (win) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/awards/${awardIdToEdit}/winner/${win._id}`,
+        `${API}/api/awards/${awardIdToEdit}/winner/${win._id}`,
         {
           year: win.year,
           pandels: win.pandels,
@@ -81,7 +82,7 @@ const EditAwards = ({ awardIdToEdit, onBack }) => {
 
     try {
       await axios.delete(
-        `http://localhost:5000/api/awards/${awardIdToEdit}/winner/${id}`
+        `${API}/api/awards/${awardIdToEdit}/winner/${id}`
       );
 
       setWinners(winners.filter((w) => w._id !== id));

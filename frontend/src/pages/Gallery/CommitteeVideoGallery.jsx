@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { IoLocationSharp } from "react-icons/io5";
 import { TbVideoMinus } from "react-icons/tb";
 import axios from "axios";
+import { API } from "../../services/api";
 
 const CommitteeVideoGallery = () => {
   const { id } = useParams();
@@ -14,7 +15,7 @@ const CommitteeVideoGallery = () => {
   useEffect(() => {
     const fetchPandel = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/pandel/${id}`);
+        const res = await axios.get(`${API}/api/pandel/${id}`);
         setPandel(res.data);
       } catch (err) {
         console.error("Error fetching pandel details:", err);
@@ -30,7 +31,7 @@ const CommitteeVideoGallery = () => {
       for (const year of years) {
         try {
           const res = await axios.get(
-            `http://localhost:5000/api/gallery/video/${id}/${year}`
+            `${API}/api/gallery/video/${id}/${year}`
           );
           results[year] = res.data.video;
         } catch {

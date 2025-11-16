@@ -3,6 +3,7 @@ import axios from "axios";
 import PujaCard from "../../component/Pujacard/PujaCard";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import { API } from "../../services/api";
 
 const BehalaParikrama = () => {
   const [pandels, setPandels] = useState([]);
@@ -15,7 +16,7 @@ const BehalaParikrama = () => {
     const fetchPandels = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:5000/api/pandel/zone/Behala");
+        const res = await axios.get(`${API}/api/pandel/zone/Behala`);
         setPandels(res.data);
       } catch (error) {
         if (error.response?.status === 404) {

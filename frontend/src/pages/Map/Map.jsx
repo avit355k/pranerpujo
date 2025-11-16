@@ -9,6 +9,7 @@ import {
 } from "react-leaflet";
 import L from "leaflet";
 import axios from "axios";
+import { API } from "../../services/api";
 import { IoLocationSharp, IoAddCircle } from "react-icons/io5";
 import { IoIosSearch } from "react-icons/io";
 import { MdGpsFixed } from "react-icons/md";
@@ -57,7 +58,7 @@ const Map = () => {
 
   // ✅ Fetch pandals
   useEffect(() => {
-    fetch("http://localhost:5000/api/pandel")
+    fetch(`${API}/api/pandel`)
       .then((res) => res.json())
       .then((data) => {
         setPandals(data);

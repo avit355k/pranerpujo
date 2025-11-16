@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { IoIosBackspace } from "react-icons/io";
+import { API } from "../../services/api";
 
 const ArtistDetails = () => {
   const { id } = useParams();
@@ -10,7 +11,7 @@ const ArtistDetails = () => {
   useEffect(() => {
     const fetchArtist = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/artist/${id}`);
+        const res = await fetch(`${API}/api/artist/${id}`);
         const data = await res.json();
         setArtist(data);
       } catch (error) {

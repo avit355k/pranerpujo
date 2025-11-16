@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
+import { API } from "../../services/api";
 
 const Winnerlist = ({ award, onClose, selectedYear }) => {
   const [winnersToShow, setWinnersToShow] = useState([]);
@@ -18,7 +19,7 @@ const Winnerlist = ({ award, onClose, selectedYear }) => {
         } else {
           // Fetch from backend for specific year
           const res = await fetch(
-            `http://localhost:5000/api/awards/${award._id}/year/${selectedYear}`
+            `${API}/api/awards/${award._id}/year/${selectedYear}`
           );
           if (!res.ok) throw new Error("Failed to fetch yearwise winners");
           const data = await res.json();

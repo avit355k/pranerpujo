@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import EditTheme from "../component/Theme/EditTheme";
+import { API } from "../../services/api";
 
 const ManageTheme = () => {
   const [themes, setThemes] = useState([]);
@@ -12,7 +13,7 @@ const ManageTheme = () => {
   const [activeTab, setActiveTab] = useState("list");
   const [themeIdToEdit, setThemeIdToEdit] = useState(null);
 
-  const API_BASE = "http://localhost:5000/api/theme";
+  const API_BASE = `${API}/api/theme`;
 
   useEffect(() => {
     fetchAllThemes();

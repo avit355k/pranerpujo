@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { API } from "../../services/api";
 
 const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
   const [formData, setFormData] = useState({
@@ -29,7 +30,7 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
     if (!pandelIdToEdit) return;
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/pandel/${pandelIdToEdit}`);
+        const res = await axios.get(`${API}/api/pandel/${pandelIdToEdit}`);
         const p = res.data;
 
         setFormData({
@@ -119,7 +120,7 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
       if (logo) data.append("logo", logo);
 
       await axios.put(
-        `http://localhost:5000/api/pandel/update/${pandelIdToEdit}`,
+        `${API}/api/pandel/update/${pandelIdToEdit}`,
         data,
         { headers: { "Content-Type": "multipart/form-data" } }
       );

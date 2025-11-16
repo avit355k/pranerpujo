@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
+import { API } from "../../services/api";
 
 const EditGallery = ({ gallery, onClose, refreshGalleries }) => {
   const [formData, setFormData] = useState({
@@ -79,7 +80,7 @@ const EditGallery = ({ gallery, onClose, refreshGalleries }) => {
     try {
       setLoading(true);
       await axios.put(
-        `http://localhost:5000/api/gallery/update/${gallery._id}`,
+        `${API}/api/gallery/update/${gallery._id}`,
         formDataToSend,
         { headers: { "Content-Type": "multipart/form-data" } }
       );

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { API } from "../../services/api";
 
 const UploadGallery = () => {
   const [pandelId, setPandelId] = useState("");
@@ -25,7 +26,7 @@ const UploadGallery = () => {
 
     try {
       setUploading(true);
-      await axios.post("http://localhost:5000/api/gallery/upload", formData, {
+      await axios.post(`${API}/api/gallery/upload`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       alert("Gallery uploaded successfully!");

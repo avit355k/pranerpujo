@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { API } from "../../services/api";
 
 const initialFormData = {
   name: "",
@@ -95,7 +96,7 @@ const AddPandel = () => {
 
       // ✅ API call
       const response = await axios.post(
-        "http://localhost:5000/api/pandel/create",
+        `${API}/api/pandel/create`,
         data,
         {
           headers: { "Content-Type": "multipart/form-data" },
