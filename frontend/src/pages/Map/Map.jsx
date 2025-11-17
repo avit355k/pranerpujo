@@ -331,7 +331,7 @@ const Map = () => {
                   key={p._id}
                   className="flex justify-between items-center bg-red-100 dark:bg-neutral-700 px-3 py-2 rounded"
                 >
-                  <span>{p.name}</span>
+                  <span className="text-black dark:text-white">{p.name}</span>
                   <div className="flex gap-2">
                     <button className="text-green-500 cursor-grab" title="Drag">
                       <AiOutlineDrag size={14} />
@@ -386,9 +386,10 @@ const Map = () => {
             }}
           >
             <TileLayer
-              url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-              attribution='&copy; CARTO &copy; OpenStreetMap contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; OpenStreetMap contributors'
             />
+
 
 
             {filteredPandals
