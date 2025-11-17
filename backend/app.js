@@ -13,7 +13,7 @@ app.use(
       "http://localhost:5173",  // frontend local
       "http://localhost:5174",  // admin local
       "https://pranerpujo.vercel.app",
-      // "https://your-admin-domain.com"
+      "https://pranerpujo-admin.vercel.app"
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   })
