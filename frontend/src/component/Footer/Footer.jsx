@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FaFacebook, FaTwitter, FaInstagram, FaGithub } from "react-icons/fa";
 
 const Footer = () => {
@@ -25,6 +26,7 @@ const Footer = () => {
             >
               <FaFacebook size={20} />
             </a>
+
             <a
               href="#"
               className="text-gray-500 dark:text-gray-400 hover:text-red-600 transition"
@@ -32,6 +34,7 @@ const Footer = () => {
             >
               <FaTwitter size={20} />
             </a>
+
             <a
               href="https://instagram.com/pranerpujo"
               target="_blank"
@@ -41,6 +44,7 @@ const Footer = () => {
             >
               <FaInstagram size={20} />
             </a>
+
             <a
               href="https://github.com/avit355k"
               target="_blank"
@@ -59,12 +63,12 @@ const Footer = () => {
             Quick Links
           </h3>
           <ul className="space-y-2 text-sm">
-            <li><a href="/" className="hover:text-red-500 transition">Home</a></li>
-            <li><a href="/about" className="hover:text-red-500 transition">About Us</a></li>
-            <li><a href="/parikrama" className="hover:text-red-500 transition">Parikrama</a></li>
-            <li><a href="/schedule" className="hover:text-red-500 transition">Schedule</a></li>
-            <li><a href="/artists" className="hover:text-red-500 transition">Artists</a></li>
-            <li><a href="/awards" className="hover:text-red-500 transition">Awards</a></li>
+            <li><Link to="/" className="hover:text-red-500 transition">Home</Link></li>
+            <li><Link to="/about" className="hover:text-red-500 transition">About Us</Link></li>
+            <li><Link to="/parikrama" className="hover:text-red-500 transition">Parikrama</Link></li>
+            <li><Link to="/schedule" className="hover:text-red-500 transition">Schedule</Link></li>
+            <li><Link to="/artists" className="hover:text-red-500 transition">Artists</Link></li>
+            <li><Link to="/awards" className="hover:text-red-500 transition">Awards</Link></li>
           </ul>
         </div>
 
@@ -74,12 +78,11 @@ const Footer = () => {
             Resources
           </h3>
           <ul className="space-y-2 text-sm">
-            <li><a href="/faq" className="hover:text-red-500 transition">FAQs</a></li>
-            <li><a href="/privacy" className="hover:text-red-500 transition">Privacy Policy</a></li>
-            <li><a href="/terms" className="hover:text-red-500 transition">Terms & Conditions</a></li>
+            <li><Link to="/faq" className="hover:text-red-500 transition">FAQs</Link></li>
+            <li><Link to="/privacy" className="hover:text-red-500 transition">Privacy Policy</Link></li>
+            <li><Link to="/terms" className="hover:text-red-500 transition">Terms & Conditions</Link></li>
           </ul>
         </div>
-
 
       </div>
 

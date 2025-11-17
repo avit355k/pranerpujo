@@ -35,7 +35,7 @@ const navLinks = [
     ],
   },
   { name: 'Awards', path: '/awards' },
-  { name: 'Artist Collection', path: '/artists' },
+  { name: 'Artist', path: '/artists' },
   { name: 'Schedule', path: '/schedule' },
   {
     name: 'About', path: '/about'
