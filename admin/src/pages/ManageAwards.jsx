@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { API } from "../../services/api";
+import { API } from "../services/api";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import { MdPlaylistAdd } from "react-icons/md";
 import EditAwards from "../component/Awards/EditAwards";

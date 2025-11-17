@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import EditTheme from "../component/Theme/EditTheme";
-import { API } from "../../services/api";
+import { API } from "../services/api";
 
 const ManageTheme = () => {
   const [themes, setThemes] = useState([]);

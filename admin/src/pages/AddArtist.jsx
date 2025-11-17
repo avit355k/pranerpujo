@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
-import { API } from "../../services/api";
+import { API } from "../services/api";
 
 const AddArtist = () => {
   const [formData, setFormData] = useState({

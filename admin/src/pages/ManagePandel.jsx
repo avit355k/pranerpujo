@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { API } from "../../services/api";
+import { API } from "../services/api";
 import EditPandel from "../component/Pandel/EditPandel";
 
 const ManagePandel = () => {

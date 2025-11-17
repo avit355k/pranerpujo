@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { API } from "../../services/api";
+import { API } from "../services/api";
 
 export default function Dashboard() {
   const [counts, setCounts] = useState({ pandals: 0, themes: 0, artists: 0 });
