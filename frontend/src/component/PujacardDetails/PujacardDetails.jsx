@@ -50,6 +50,7 @@ const PujacardDetails = () => {
   useEffect(() => {
     const fetchTheme = async () => {
       if (!id || !selectedYear) return;
+      setTheme(null);
       setThemeLoading(true);
       try {
         const res = await axios.get(

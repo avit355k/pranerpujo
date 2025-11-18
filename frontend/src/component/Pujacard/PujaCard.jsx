@@ -11,13 +11,13 @@ const PujaCard = ({ pandel }) => {
     <div
       onClick={() => navigate(`/puja-details/${pandel._id}`)}
       className="relative bg-white dark:bg-neutral-900 rounded-lg shadow-lg overflow-hidden 
-                 transition-transform duration-300 border border-gray-400 
-                 dark:border-gray-700 cursor-pointer w-full max-w-sm mx-auto hover:scale-105"
+                  border border-gray-400  dark:border-gray-700 cursor-pointer w-full max-w-sm mx-auto 
+                  transition-transform duration-300 hover:-translate-x-2"
     >
       {/* Image Section */}
       <div className="h-44 sm:h-40 md:h-44 lg:h-52 w-full overflow-hidden flex items-center justify-center bg-gray-100 dark:bg-neutral-800">
         <img
-          src={pandel.logo }
+          src={pandel.logo}
           alt={pandel.name || "Pandel"}
           className="h-full w-full object-cover transform  transition-transform duration-500"
         />

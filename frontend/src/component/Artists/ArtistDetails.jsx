@@ -43,7 +43,7 @@ const ArtistDetails = () => {
         to="/artists"
         className="inline-block mb-6 text-red-600 hover:underline"
       >
-        <IoIosBackspace size={22}/>
+        <IoIosBackspace size={22} />
       </Link>
 
       <div className="max-w-6xl mx-auto bg-neutral-200 dark:bg-neutral-900 rounded-2xl shadow-md p-8">
@@ -57,7 +57,7 @@ const ArtistDetails = () => {
             <h1 className="text-3xl font-bold text-red-600 mb-2">
               {artist.name}
             </h1>
-            <p className="text-neutral-700 dark:text-neutral-300 mb-4">
+            <p className="font-bold text-neutral-700 dark:text-neutral-300 mb-4">
               {artist.role || artist.specialization || "Artist"}
             </p>
             <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
@@ -92,12 +92,9 @@ const ArtistDetails = () => {
                     <h3 className="font-semibold text-lg text-neutral-800 dark:text-white mb-1">
                       {work.theme?.title || work.description || "Untitled"}
                     </h3>
-                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                      <span className="font-medium">Year:</span> {work.year}
-                    </p>
-                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                      <span className="font-medium">Pandel:</span>{" "}
-                      {work.pandel?.name || "Unknown"}
+                    <p className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                     
+                      {work.pandel?.name ? `${work.pandel.name} (${work.year})` : `Unknown (${work.year})`}
                     </p>
                   </div>
                 </div>
