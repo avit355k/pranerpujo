@@ -17,12 +17,12 @@ import { FaTrashAlt, FaMap } from "react-icons/fa";
 import { BsGridFill } from "react-icons/bs";
 import { AiOutlineDrag } from "react-icons/ai";
 
-import googlePin from "/google_maps_pin.png";
+import googlePin from "/gps.png";
 
 // ✅ Custom Marker Icon
 const customIcon = new L.Icon({
   iconUrl: googlePin,
-  iconSize: [32, 40],
+  iconSize: [35, 40],
   iconAnchor: [17, 34],
   popupAnchor: [1, -30],
 });
