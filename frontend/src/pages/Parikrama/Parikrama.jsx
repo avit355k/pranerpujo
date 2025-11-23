@@ -92,12 +92,12 @@ const Parikrama = () => {
               className="w-full px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 dark:bg-neutral-950 dark:text-white dark:border-gray-700"
             >
               <option value="">All Zones</option>
-              <option value="north kolkata">North Kolkata</option>
+              <option value="north kolkata">North Kolkata</option> 
               <option value="south kolkata">South Kolkata</option>
-              <option value="east kolkata">East Kolkata</option>
-              <option value="west kolkata">West Kolkata</option>
-              <option value="central kolkata">Central Kolkata</option>
-              <option value="bonedibari">Bonedi Bari</option>
+              <option value="North & East City">North-East Kolkata</option>
+              <option value="Behala">West Kolkata</option>
+              <option value="Haridevpur & Others">Haridebpur & Others</option>
+              <option value="SaltLake & Central">SaltLake & Central</option>
             </select>
           </div>
 

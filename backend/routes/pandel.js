@@ -90,7 +90,7 @@ router.post("/create", upload.single("logo"), async (req, res) => {
 //GET all Pandels
 router.get("/", async (req, res) => {
   try {
-    const pandels = await Pandel.find().sort({ createdAt: -1 });
+    const pandels = await Pandel.find().sort({ name: 1 });
     res.status(200).json(pandels);
   } catch (error) {
     res
