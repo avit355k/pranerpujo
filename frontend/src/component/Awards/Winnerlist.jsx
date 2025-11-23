@@ -64,7 +64,7 @@ const Winnerlist = ({ award, onClose, selectedYear }) => {
           <p className="text-red-500 text-center py-6">{error}</p>
         ) : winnersToShow && winnersToShow.length > 0 ? (
           winnersToShow
-            .slice()
+            .sort((a, b) => a.year - b.year)
             .reverse()
             .map((winner, index) => (
               <div key={index} className="mb-6">
