@@ -35,32 +35,42 @@ const YearWisePhotoGallery = () => {
     if (id) fetchPandel();
   }, [id]);
 
+  //get image size utility
+  const getImageSize = (src) => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => resolve({ width: img.width, height: img.height });
+    });
+  };
+
   // ✅ Fetch Year-wise Photos
-  useEffect(() => {
-    const fetchGalleryPhotos = async () => {
-      try {
-        const res = await axios.get(
-          `${API}/api/gallery/photos/${id}/${year}`
+useEffect(() => {
+  const fetchGalleryPhotos = async () => {
+    try {
+      const res = await axios.get(`${API}/api/gallery/photos/${id}/${year}`);
+
+      if (res.data?.photos?.length) {
+        const formattedPhotos = await Promise.all(
+          res.data.photos.map(async (src) => {
+            const size = await getImageSize(src);
+            return { src, ...size };
+          })
         );
 
-        if (res.data?.photos?.length) {
-          const formattedPhotos = res.data.photos.map((src) => ({
-            src,
-            width: 1000,
-            height: 665,
-          }));
-          setPhotos(formattedPhotos);
-        } else {
-          setPhotos([]); // empty gallery fallback
-        }
-      } catch (err) {
-        console.error("Error fetching gallery photos:", err);
-        setPhotos([]); // handle errors gracefully
+        setPhotos(formattedPhotos);
+      } else {
+        setPhotos([]);
       }
-    };
+    } catch (err) {
+      console.error("Error fetching gallery photos:", err);
+      setPhotos([]);
+    }
+  };
 
-    if (id && year) fetchGalleryPhotos();
-  }, [id, year]);
+  if (id && year) fetchGalleryPhotos();
+}, [id, year]);
+
 
   if (!pandel)
     return <p className="text-center text-red-500 py-8">Loading pandel details...</p>;
