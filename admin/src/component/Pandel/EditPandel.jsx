@@ -21,13 +21,15 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
     facebook: "",
     website: "",
   });
+
   const [logo, setLogo] = useState(null);
   const [existingLogo, setExistingLogo] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // 🔹 Fetch existing pandel data for editing
+  // Fetch existing pandel for editing
   useEffect(() => {
     if (!pandelIdToEdit) return;
+
     const fetchData = async () => {
       try {
         const res = await axios.get(`${API}/api/pandel/${pandelIdToEdit}`);
@@ -57,13 +59,15 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
         console.error("Error fetching pandel:", err);
       }
     };
+
     fetchData();
   }, [pandelIdToEdit]);
 
-  // 🔹 Handle input changes
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  // Generic input change handler
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  // 🔹 Handle contact number changes
+  // Contact number handler
   const handleContactChange = (e, index) => {
     const updated = [...formData.contactNumbers];
     updated[index] = e.target.value;
@@ -73,67 +77,74 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
   const addContactField = () =>
     setFormData({ ...formData, contactNumbers: [...formData.contactNumbers, ""] });
 
-  // 🔹 Submit handler
+  // Submit handler (FIXED)
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!pandelIdToEdit) return alert("No pandel selected to edit!");
+    if (!pandelIdToEdit) return alert("No pandel selected!");
 
+    setLoading(true);
+
+    // Build FormData
+    const data = new FormData();
+    data.append("name", formData.name);
+    data.append("address", formData.address);
+    data.append("founded", formData.founded);
+    data.append("type", formData.type);
+    data.append("zone", formData.zone);
+    data.append("heritageStatus", formData.heritageStatus === "true");
+
+    data.append(
+      "location",
+      JSON.stringify({
+        city: formData.city,
+        latitude: formData.latitude,
+        longitude: formData.longitude,
+      })
+    );
+
+    data.append(
+      "nearestLocation",
+      JSON.stringify({
+        metro: formData.metro,
+        railway: formData.railway,
+        bus: formData.bus,
+      })
+    );
+
+    data.append(
+      "contactNumbers",
+      JSON.stringify(formData.contactNumbers.filter((n) => n))
+    );
+
+    data.append("email", formData.email);
+
+    data.append(
+      "socialLinks",
+      JSON.stringify({
+        facebook: formData.facebook,
+        website: formData.website,
+      })
+    );
+
+    if (logo) data.append("logo", logo);
+
+    // 🔥 FIX: Only the PUT request inside try/catch
     try {
-      setLoading(true);
-
-      const data = new FormData();
-      data.append("name", formData.name);
-      data.append("address", formData.address);
-      data.append("founded", formData.founded);
-      data.append("type", formData.type);
-      data.append("zone", formData.zone);
-      data.append("heritageStatus", formData.heritageStatus === "true");
-
-      data.append(
-        "location",
-        JSON.stringify({
-          city: formData.city,
-          latitude: formData.latitude,
-          longitude: formData.longitude,
-        })
-      );
-
-      data.append(
-        "nearestLocation",
-        JSON.stringify({
-          metro: formData.metro,
-          railway: formData.railway,
-          bus: formData.bus,
-        })
-      );
-
-      data.append("contactNumbers", JSON.stringify(formData.contactNumbers.filter((n) => n)));
-      data.append("email", formData.email);
-      data.append(
-        "socialLinks",
-        JSON.stringify({
-          facebook: formData.facebook,
-          website: formData.website,
-        })
-      );
-
-      if (logo) data.append("logo", logo);
-
-      await axios.put(
-        `${API}/api/pandel/update/${pandelIdToEdit}`,
-        data,
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
+      await axios.put(`${API}/api/pandel/update/${pandelIdToEdit}`, data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
       alert("✅ Pandel updated successfully!");
-      fetchPandels();
-      if (onBack) onBack();
     } catch (error) {
-      console.error("Error updating pandel:", error);
+      console.error("PUT ERROR:", error);
       alert("❌ Error updating pandel");
     } finally {
       setLoading(false);
     }
+
+    // 🔥 These MUST be outside try/catch (fix for double alerts)
+    fetchPandels();
+    if (onBack) onBack();
   };
 
   return (
@@ -165,7 +176,7 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
           />
         </div>
 
-        {/* Location Info */}
+        {/* Location */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input
             type="text"
@@ -176,6 +187,7 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
             required
             className="p-2 border rounded-lg dark:bg-neutral-900 w-full"
           />
+
           <div className="flex gap-2">
             <input
               type="number"
@@ -198,7 +210,7 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
           </div>
         </div>
 
-     {/* Type, Zone & Heritage */}
+        {/* Type / Zone / Heritage */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <select
             name="type"
@@ -228,7 +240,6 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
             <option value="Bonedi Bari">Bonedi Bari</option>
           </select>
 
-           {/* Heritage dropdown */}
           <select
             name="heritageStatus"
             value={formData.heritageStatus}
@@ -249,10 +260,11 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
           className="p-2 border rounded-lg dark:bg-neutral-900 w-full"
         />
 
-        {/* Nearest Locations */}
+        {/* Nearest */}
         <h3 className="text-lg font-medium text-emerald-500 mt-6">
           Nearest Locations
         </h3>
+
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <input
             type="text"
@@ -280,10 +292,11 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
           />
         </div>
 
-        {/* Contact Info */}
+        {/* Contacts */}
         <h3 className="text-lg font-medium text-emerald-500 mt-6">
           Contact Information
         </h3>
+
         <div className="space-y-3">
           {formData.contactNumbers.map((number, index) => (
             <input
@@ -295,6 +308,7 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
               className="p-2 border rounded-lg dark:bg-neutral-900 w-full"
             />
           ))}
+
           <button
             type="button"
             onClick={addContactField}
@@ -313,10 +327,11 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
           />
         </div>
 
-        {/* Social Links */}
+        {/* Social */}
         <h3 className="text-lg font-medium text-emerald-500 mt-6">
           Social Links
         </h3>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input
             type="text"
@@ -336,11 +351,12 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
           />
         </div>
 
-        {/* Logo Upload */}
+        {/* Logo */}
         <div className="mt-4">
           <label className="block mb-2 text-sm text-gray-600">
             {existingLogo ? "Update Logo" : "Upload Logo"}
           </label>
+
           {existingLogo && (
             <img
               src={existingLogo}
@@ -348,6 +364,7 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
               className="w-20 h-20 rounded object-cover border mb-2"
             />
           )}
+
           <input
             type="file"
             accept="image/*"
@@ -356,11 +373,11 @@ const EditPandel = ({ pandelIdToEdit, fetchPandels, onBack }) => {
           />
         </div>
 
-        {/* Submit Button */}
+        {/* Buttons */}
         <button
           type="submit"
           disabled={loading}
-          className="bg-emerald-500 text-white px-6 py-2 rounded-lg hover:bg-emerald-600  w-full font-semibold cursor-pointer"
+          className="bg-emerald-500 text-white px-6 py-2 rounded-lg hover:bg-emerald-600 w-full font-semibold cursor-pointer"
         >
           {loading ? "Updating..." : "Update Pandel"}
         </button>

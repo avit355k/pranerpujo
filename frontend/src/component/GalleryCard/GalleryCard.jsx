@@ -9,7 +9,7 @@ const GalleryCard = ({ pandel, onClick }) => {
       onClick={onClick}
       className="relative bg-white dark:bg-neutral-900 rounded-lg shadow-lg overflow-hidden 
                  transition-transform duration-300 border border-gray-400 
-                 dark:border-gray-700 cursor-pointer w-full max-w-sm mx-auto hover:scale-104"
+                 dark:border-gray-700 cursor-pointer w-full max-w-sm mx-auto hover:-translate-x-2"
     >
       {/* Image Section */}
       <div className="h-48 sm:h-56 md:h-48 lg:h-56 w-full overflow-hidden">

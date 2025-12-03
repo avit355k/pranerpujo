@@ -36,13 +36,16 @@ router.get("/", async (req, res) => {
   }
 });
 
-// ✅ Get single artist by ID
+// Get single artist by ID
 router.get("/:id", async (req, res) => {
   try {
     const artist = await Artist.findById(req.params.id).populate("works.pandel works.theme");
     if (!artist) {
       return res.status(404).json({ message: "Artist not found" });
     }
+    // Sort works by year descending (2023 → 2024 → 2025)
+    artist.works.sort((a, b) => a.year - b.year);
+
     res.status(200).json(artist);
   } catch (error) {
     console.error("Error fetching artist:", error);
@@ -50,7 +53,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// ✅ Update artist info
+//  Update artist info
 router.put("/:id", async (req, res) => {
   try {
     const updated = await Artist.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -64,7 +67,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// ✅ Delete artist
+//  Delete artist
 router.delete("/:id", async (req, res) => {
   try {
     const deleted = await Artist.findByIdAndDelete(req.params.id);
@@ -78,7 +81,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// ✅ Add a work entry to an artist
+//  Add a work entry to an artist
 router.post("/:id/work", async (req, res) => {
   try {
     const { year, pandel, theme, description } = req.body;

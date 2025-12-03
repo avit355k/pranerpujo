@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PujaCard from "../../component/Pujacard/PujaCard";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaAngleUp } from "react-icons/fa";
 import axios from "axios";
 import { API } from "../../services/api";
 
@@ -10,7 +10,10 @@ const Parikrama = () => {
   const [pandels, setPandels] = useState([]);
   const [filteredPandels, setFilteredPandels] = useState([]);
 
-  // ✅ Fetch all pandels from backend
+  //  Missing state added
+  const [showTopBtn, setShowTopBtn] = useState(false);
+
+  //  Fetch all pandels from backend
   useEffect(() => {
     const fetchPandels = async () => {
       try {
@@ -47,13 +50,27 @@ const Parikrama = () => {
     setFilteredPandels(filtered);
   }, [searchTerm, zoneFilter, pandels]);
 
-  // ✅ Reset Filters
+  //  Reset Filters
   const handleReset = () => {
     setSearchTerm("");
     setZoneFilter("");
     setFilteredPandels(pandels);
   };
 
+  // Scroll listener for Go-to-Top button
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 500) setShowTopBtn(true);
+      else setShowTopBtn(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Scroll to top
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <section className="mx-auto px-4 py-6 bg-white dark:bg-black transition-colors duration-300">
@@ -92,7 +109,7 @@ const Parikrama = () => {
               className="w-full px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 dark:bg-neutral-950 dark:text-white dark:border-gray-700"
             >
               <option value="">All Zones</option>
-              <option value="north kolkata">North Kolkata</option> 
+              <option value="north kolkata">North Kolkata</option>
               <option value="south kolkata">South Kolkata</option>
               <option value="North & East City">North-East Kolkata</option>
               <option value="Behala">West Kolkata</option>
@@ -129,6 +146,17 @@ const Parikrama = () => {
           </div>
         </div>
       </div>
+
+      {/* Go to Top Button */}
+      {showTopBtn && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 bg-red-600 text-white rounded-full p-3 shadow-lg hover:bg-red-700 transition duration-300 cursor-pointer"
+          title="Go to Top"
+        >
+          <FaAngleUp size={20} />
+        </button>
+      )}
     </section>
   );
 };

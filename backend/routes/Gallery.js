@@ -137,15 +137,22 @@ router.put("/update/:id", upload.array("newPhotos"), async (req, res) => {
 });
 // ================= Get All Galleries =================
 router.get("/all", async (req, res) => {
-  try {
-    const galleries = await Gallery.find()
-      .populate("pandel", "name")
-      .sort({ year: -1 });
-    res.status(200).json(galleries);
-  } catch (err) {
-    console.error("Fetch all galleries error:", err.message);
-    res.status(500).json({ error: "Internal server error" });
-  }
+    try {
+        const galleries = await Gallery.find()
+            .populate("pandel", "name");
+
+        // Sort by populated field pandel.name
+        galleries.sort((a, b) => {
+            const nameA = a.pandel?.name?.toLowerCase() || "";
+            const nameB = b.pandel?.name?.toLowerCase() || "";
+            return nameA.localeCompare(nameB);
+        });
+
+        res.status(200).json(galleries);
+    } catch (err) {
+        console.error("Fetch all galleries error:", err.message);
+        res.status(500).json({ error: "Internal server error" });
+    }
 });
 // ================= Delete Gallery =================
 router.delete("/delete/:id", async (req, res) => {
@@ -171,7 +178,7 @@ router.delete("/delete/:id", async (req, res) => {
     }
 });
 
-// ================= Get Photos by Pandel & Year =================
+// ================= Get Photos by Pandel & Year ================= 
 router.get("/photos/:pandelId/:year", async (req, res) => {
     try {
         const { pandelId, year } = req.params;

@@ -31,6 +31,7 @@ const PujacardDetails = () => {
   const dropdownRef = useRef(null);
   const years = ["2025", "2024", "2023"];
 
+
   // Fetch pandel details
   useEffect(() => {
     const fetchPandel = async () => {
@@ -329,8 +330,8 @@ const PujacardDetails = () => {
                 photos={
                   theme.gallery?.map((src) => ({
                     src,
-                    width: 1000,
-                    height: 665,
+                    width: 1920,
+                    height: 1200,
                   })) || []
                 }
                 targetRowHeight={250}
@@ -342,8 +343,8 @@ const PujacardDetails = () => {
                 slides={
                   theme.gallery?.map((src) => ({
                     src,
-                    width: 1000,
-                    height: 665,
+                    width: 1920,
+                    height: 1200,
                   })) || []
                 }
                 open={selectedIndex >= 0}
@@ -358,7 +359,7 @@ const PujacardDetails = () => {
               Video:{" "}
               <span className="text-red-600 font-semibold">{selectedYear}</span>
             </h1>
-         {/*youtuve link*/}
+            {/*youtuve link*/}
             <div className="mt-4 w-full flex justify-center">
               <div className="w-full md:w-3/4 lg:w-1/2 aspect-video rounded-xl overflow-hidden shadow-lg border border-red-200">
                 <iframe

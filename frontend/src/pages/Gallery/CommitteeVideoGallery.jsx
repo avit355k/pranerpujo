@@ -9,7 +9,7 @@ const CommitteeVideoGallery = () => {
   const { id } = useParams();
   const [pandel, setPandel] = useState(null);
   const [videos, setVideos] = useState({});
-  const years = [2025, 2024, 2023]; // 👈 Years to display
+  const years = [2025, 2024, 2023]; // Years to display
 
   // ✅ Fetch Pandel Details
   useEffect(() => {
