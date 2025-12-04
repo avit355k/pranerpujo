@@ -355,7 +355,7 @@ const PujacardDetails = () => {
             </div>
 
             <br />
-            <h1 className="text-lg font-bold text-red-600">
+            <h1 className="text-lg font-bold text-red-600 pl-4">
               Video:{" "}
               <span className="text-red-600 font-semibold">{selectedYear}</span>
             </h1>
