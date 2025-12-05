@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
+import { API } from "../../services/api";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
+
+  const [loading, setLoading] = useState(false);
+  const [msg, setMsg] = useState({ type: "", text: "" });
 
   const handleChange = (e) => {
     setFormData({
@@ -15,10 +23,29 @@ const SignUp = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Sign Up Data:", formData);
-    // You can connect this to your backend API later
+    setLoading(true);
+    setMsg({ type: "", text: "" });
+
+    try {
+      const res = await axios.post(`${API}/api/admin/signup`, formData);
+
+      setMsg({ type: "success", text: res.data.message || "Signup successful!" });
+
+      setTimeout(() => {
+        navigate("/admin/login");
+      }, 1500);
+    } catch (err) {
+      setMsg({
+        type: "error",
+        text:
+          err.response?.data?.message ||
+          "Signup failed. Please try again.",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -27,6 +54,16 @@ const SignUp = () => {
         <h2 className="text-3xl font-bold text-center text-red-600 mb-6">
           Create an Account
         </h2>
+
+        {msg.text && (
+          <p
+            className={`text-center mb-3 ${
+              msg.type === "success" ? "text-green-600" : "text-red-500"
+            }`}
+          >
+            {msg.text}
+          </p>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Name */}
@@ -74,17 +111,18 @@ const SignUp = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors duration-300"
+            disabled={loading}
+            className="w-full py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors duration-300 cursor-pointer"
           >
-            Sign Up
+            {loading ? "Creating Account..." : "Sign Up"}
           </button>
         </form>
 
         <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
           Already have an account?{" "}
-          <a href="/admin/login" className="text-red-600 hover:underline">
+          <Link to="/admin/login" className="text-red-600 hover:underline">
             Log in
-          </a>
+          </Link>
         </p>
       </div>
     </section>
