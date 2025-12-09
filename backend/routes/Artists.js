@@ -139,5 +139,43 @@ router.get("/search/:query", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 });
+// Update specific work
+router.put("/:artistId/work/:workId", async (req, res) => {
+  try {
+    const { artistId, workId } = req.params;
+    const updatedData = req.body;
+
+    const artist = await Artist.findById(artistId);
+    if (!artist) return res.status(404).json({ message: "Artist not found" });
+
+    const work = artist.works.id(workId);
+    if (!work) return res.status(404).json({ message: "Work not found" });
+
+    Object.assign(work, updatedData);
+    await artist.save();
+
+    res.status(200).json({ message: "Work updated", artist });
+  } catch (error) {
+    console.error("Error updating work:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+// Delete work entry
+router.delete("/:artistId/work/:workId", async (req, res) => {
+  try {
+    const { artistId, workId } = req.params;
+
+    const artist = await Artist.findById(artistId);
+    if (!artist) return res.status(404).json({ message: "Artist not found" });
+
+    artist.works = artist.works.filter((work) => work._id.toString() !== workId);
+    await artist.save();
+
+    res.status(200).json({ message: "Work deleted" });
+  } catch (error) {
+    console.error("Error deleting work:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
 
 module.exports = router;
