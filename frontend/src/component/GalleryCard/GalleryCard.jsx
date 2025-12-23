@@ -18,12 +18,12 @@ const GalleryCard = ({ pandel, onClick }) => {
           alt={pandel.name || "Pandel"}
           className="h-full w-full object-cover transition-transform duration-500"
         />
-      </div>
+      </div> 
 
       {/* Content */}
       <div className="p-4">
         {/* Puja Name */}
-        <h2 className="text-lg md:text-xl font-bold text-gray-900 dark:text-gray-100">
+        <h2 className="text-lg md:text-xl font-bold text-gray-900 dark:text-gray-100 truncate">
           {pandel.name}
         </h2>
 

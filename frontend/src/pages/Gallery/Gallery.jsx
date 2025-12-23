@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { TbBrandAppgallery } from "react-icons/tb";
+import { FaSearch, FaAngleUp } from "react-icons/fa";
 import GalleryCard from "../../component/GalleryCard/GalleryCard";
 import axios from "axios";
 import { API } from "../../services/api";
@@ -8,8 +9,8 @@ import { API } from "../../services/api";
 const Gallery = () => {
   const [pandels, setPandels] = useState([]);
   const navigate = useNavigate();
-
-  // ✅ Fetch all pandels from backend
+  const [showTopBtn, setShowTopBtn] = useState(false);
+  //  Fetch all pandels from backend
   useEffect(() => {
     const fetchPandels = async () => {
       try {
@@ -23,7 +24,20 @@ const Gallery = () => {
     };
     fetchPandels();
   }, []);
+  // Scroll listener for Go-to-Top button
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 500) setShowTopBtn(true);
+      else setShowTopBtn(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
+  // Scroll to top
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <div className="p-4 bg-white dark:bg-black min-h-screen">
       {/* Header */}
@@ -49,6 +63,17 @@ const Gallery = () => {
         <p className="text-center text-gray-600 dark:text-gray-400">
           No pandels found.
         </p>
+      )}
+
+      {/* Go to Top Button */}
+      {showTopBtn && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 bg-red-600 text-white rounded-full p-3 shadow-lg hover:bg-red-700 transition duration-300 cursor-pointer"
+          title="Go to Top"
+        >
+          <FaAngleUp size={20} />
+        </button>
       )}
     </div>
   );
