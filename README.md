@@ -1,7 +1,7 @@
 # Pranerpujo
 
 **Pranerpujo** is a full-stack web application designed to celebrate the spirit, culture, and emotion of Durga Puja.  
-It features a modern frontend, a powerful backend API, and an admin panel for management.
+It features a modern frontend, a powerful backend API, and an admin panel for management.This project goes beyond a static listing system and focuses on **data management, discoverability, and route optimization for real-world use.
 
 👉 **Live Demo:** https://pranerpujo.vercel.app
 
@@ -9,12 +9,16 @@ It features a modern frontend, a powerful backend API, and an admin panel for ma
 
 ## ✨ Features
 
-- 🎨 Responsive and modern UI
-- 🌐 Full-stack architecture
-- ⚙️ Backend API support
-- 🛠️ Admin panel for management
-- 🚀 Deployed and live on Vercel
-
+-  Zone-wise Puja Committee Listing
+-  Year-wise Theme, Artist & Gallery Details
+-  Artist Directory with Working History
+-  Gallery Management for Each Puja Committee
+-  Interactive Map View of Puja Committees
+-  Route Planning with Starting Location
+-  Optimized Puja Routes for Better Coverage
+-  Admin Panel
+   -  Add / Update / Delete Puja Committee details
+   -  Manage Themes, Artists, and Galleries
 ---
 
 ## 🧰 Tech Stack
