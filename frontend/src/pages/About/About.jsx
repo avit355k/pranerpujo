@@ -193,65 +193,7 @@ const About = () => {
           ))}
         </div>
       </section>
-      {/* Credits Section */}
-<section className="py-16 px-8 md:px-16 lg:px-24 bg-neutral-100 dark:bg-neutral-900 text-center">
-  <motion.h2
-    className="text-3xl font-bold text-red-600 mb-10"
-    initial={{ opacity: 0, y: -30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8 }}
-    viewport={{ once: true }}
-  >
-    Credits
-  </motion.h2>
-  <p className="max-w-2xl mx-auto text-neutral-700 dark:text-neutral-300 mb-12">
-    This project is the result of collaboration, creativity, and cultural passion — a tribute to the artistry and devotion of Durga Puja.
-  </p>
 
-  <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
-    {/* Developer & Designer */}
-    <motion.div
-      className="p-6 bg-white dark:bg-neutral-800 rounded-2xl shadow-md hover:shadow-lg transition flex flex-col items-center text-center"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.1 }}
-      viewport={{ once: true }}
-    >
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-        alt="Developer"
-        className="w-20 h-20 mb-4 rounded-full object-cover"
-      />
-      <h3 className="text-xl font-semibold text-neutral-800 dark:text-white">
-        Avijit Rakshit
-      </h3>
-      <p className="text-sm text-neutral-600 dark:text-neutral-400">
-        Developer & UI/UX Designer
-      </p>
-    </motion.div>
-
-    {/* Idea & Research */}
-    <motion.div
-      className="p-6 bg-white dark:bg-neutral-800 rounded-2xl shadow-md hover:shadow-lg transition flex flex-col items-center text-center"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.3 }}
-      viewport={{ once: true }}
-    >
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/4140/4140051.png"
-        alt="Researcher"
-        className="w-20 h-20 mb-4 rounded-full object-cover"
-      />
-      <h3 className="text-xl font-semibold text-neutral-800 dark:text-white">
-        Manabrata Ghosh
-      </h3>
-      <p className="text-sm text-neutral-600 dark:text-neutral-400">
-        Idea & Research Contributor
-      </p>
-    </motion.div>
-  </div>
-</section>
 
     </div>
   );

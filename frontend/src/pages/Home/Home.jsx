@@ -6,17 +6,15 @@ import { motion } from "framer-motion";
 
 const Home = () => {
   const awardLogos = [
-     "https://massart.in/wp-content/uploads/elementor/thumbs/logo-qr9acsclmd2q8595b59ahdtqo7khqr635qvufs4m36.png",
-    "https://sharadshamman.asianpaints.com/images/apss%20logo%201.png",
-    "https://ultratech7wonders.com/static/media/logo.b94c8b0a2875534f54d4.png",
+    "https://ik.imagekit.io/avit355k/pandels/Awards/massart.png",
+    "https://ik.imagekit.io/avit355k/pandels/Awards/asian_paints.png",
+    "https://ik.imagekit.io/avit355k/pandels/Awards/7wonders.png",
     "https://pujoperfect.in/images/pp_scroll_head_logo.png",
     "https://www.indianfestivaldiary.com/durgapuja/awards/abp_sharad_arghya/abp_sharad_arghya.jpg",
     "https://www.bergerpriyopujo.com/images/logo.png",
-    "https://sitimahapuja.in/images/awards/abp-sarbojonin.jpg",
     "https://images.news18.com/dlxczavtqcctuei/news18/static/images/news18bengali-logo.svg",
     "https://www.nerolac.com/SheraParaSheraPujo/images/spsp-banner-image.png",
     "https://www.indianfestivaldiary.com/durgapuja/awards/narayani_namastute/narayani_namastute.jpg",
-    "https://sitimahapuja.in/images/awards/zee24.jpg",
   ];
 
   return (
