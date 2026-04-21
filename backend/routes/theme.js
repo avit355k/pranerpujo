@@ -7,19 +7,22 @@ const Theme = require("../model/theme");
 const Pandel = require("../model/pandels");
 const Artist = require("../model/artists");
 
-// 🔧 ImageKit configuration
+// ImageKit configuration
 const imagekit = new ImageKit({
   publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
   privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
   urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
 });
 
-// 🧠 In-memory cache
+// In-memory cache
 const uploadedImageCache = new Map();
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-// 🔍 Helper: Check if an image exists in ImageKit
+//get file extension 
+const getExtension = (filename) => filename.split(".").pop();
+
+// Helper: Check if an image exists in ImageKit
 async function checkIfImageExists(fileName, folder = "/pandels") {
   const cacheKey = `${folder}/${fileName}`;
   if (uploadedImageCache.has(cacheKey)) return uploadedImageCache.get(cacheKey);
@@ -42,7 +45,7 @@ async function checkIfImageExists(fileName, folder = "/pandels") {
   }
 }
 
-// 🧹 Helper: Delete ImageKit file by URL
+// Helper: Delete ImageKit file by URL
 async function deleteImageByUrl(url) {
   try {
     const parts = url.split("/"); // Extract file name from URL
@@ -56,16 +59,15 @@ async function deleteImageByUrl(url) {
 
     if (files.length > 0) {
       await imagekit.deleteFile(files[0].fileId);
-      console.log(`🗑️ Deleted from ImageKit: ${fileName}`);
+      console.log(` Deleted from ImageKit: ${fileName}`);
     }
   } catch (err) {
-    console.error("❌ Failed to delete image:", err.message);
+    console.error(" Failed to delete image:", err.message);
   }
 }
 
-/* ======================================================
-   ✅ CREATE THEME
-====================================================== */
+//create theme
+
 router.post(
   "/create",
   upload.fields([
@@ -99,11 +101,12 @@ router.post(
         }
       }
 
-      // 🖼️ Upload main image
+      //  Upload main image
       let mainImageUrl = null;
       if (req.files["mainImageFile"]?.[0]) {
         const file = req.files["mainImageFile"][0];
-        const fileName = `${title}-${year}-main.jpg`;
+        const ext = getExtension(file.originalname);
+        const fileName = `${title}-${year}-main.${ext}`;
 
         mainImageUrl =
           (await checkIfImageExists(fileName, "/pandels")) ||
@@ -117,11 +120,12 @@ router.post(
           }));
       }
 
-      // 🖼️ Upload gallery images (parallel)
+      //  Upload gallery images (parallel)
       let galleryUrls = [];
       if (req.files["galleryFiles"]?.length > 0) {
         const uploadPromises = req.files["galleryFiles"].map(async (file, index) => {
-          const fileName = `${title}-${year}-gallery-${index + 1}.jpg`;
+          const ext = getExtension(file.originalname);
+          const fileName = `${title}-${year}-gallery-${index + 1}.${ext}`;
 
           const existingUrl = await checkIfImageExists(fileName, "/pandels/gallery");
           if (existingUrl) return existingUrl;
@@ -138,7 +142,7 @@ router.post(
         galleryUrls = await Promise.all(uploadPromises);
       }
 
-      // 💾 Save theme
+      //  Save theme
       const newTheme = new Theme({
         title,
         concept,
@@ -158,9 +162,8 @@ router.post(
     }
   }
 );
-/* ======================================================
-   ✅ GET ALL THEMES
-====================================================== */
+
+//get all themes
 router.get("/all", async (req, res) => {
   try {
     const themes = await Theme.find()
@@ -178,10 +181,9 @@ router.get("/all", async (req, res) => {
   }
 });
 
-/* ======================================================
-   ✅ SEARCH THEMES (by title or concept)
+/* SEARCH THEMES (by title or concept)
    Example: GET /api/theme/search?q=Durga
-====================================================== */
+ */
 router.get("/search", async (req, res) => {
   try {
     const { q } = req.query;
@@ -205,11 +207,9 @@ router.get("/search", async (req, res) => {
   }
 });
 
-/* ======================================================
-   ✅ FILTER THEMES (by year or artist)
+/* FILTER THEMES (by year or artist)
    Example: GET /api/theme/filter?year=2024
-            GET /api/theme/filter?artist=652b1f3...
-====================================================== */
+            GET /api/theme/filter?artist=652b1f3...*/
 router.get("/filter", async (req, res) => {
   try {
     const { year, artist } = req.query;
@@ -236,9 +236,8 @@ router.get("/filter", async (req, res) => {
   }
 });
 
-/* ======================================================
-   ✅ UPDATE THEME (with cleanup)
-====================================================== */
+//update theme
+
 router.put(
   "/:id",
   upload.fields([
@@ -254,13 +253,14 @@ router.put(
 
       let mainImageUrl = theme.mainImage;
 
-      // 🖼️ Replace main image
+      //  Replace main image
       if (req.files["mainImageFile"]?.[0]) {
         // Delete old image first
         if (theme.mainImage) await deleteImageByUrl(theme.mainImage);
 
         const file = req.files["mainImageFile"][0];
-        const fileName = `${title}-${year}-main.jpg`;
+        const ext = getExtension(file.originalname);
+        const fileName = `${title}-${year}-main.${ext}`;
 
         mainImageUrl =
           (await checkIfImageExists(fileName, "/pandels")) ||
@@ -274,7 +274,7 @@ router.put(
           }));
       }
 
-      // 🖼️ Update gallery
+      //  Update gallery
       let newGalleryUrls = existingGallery ? JSON.parse(existingGallery) : [];
 
       if (req.files["galleryFiles"]?.length > 0) {
@@ -284,7 +284,8 @@ router.put(
         }
 
         const uploadPromises = req.files["galleryFiles"].map(async (file, index) => {
-          const fileName = `${title}-${year}-gallery-${index + 1}.jpg`;
+          const ext = getExtension(file.originalname);
+          const fileName = `${title}-${year}-gallery-${index + 1}.${ext}`;
 
           const existingUrl = await checkIfImageExists(fileName, "/pandels/gallery");
           if (existingUrl) return existingUrl;
@@ -302,7 +303,7 @@ router.put(
         newGalleryUrls = [...newGalleryUrls, ...uploaded];
       }
 
-      // 🧾 Update DB fields
+      //  Update DB fields
       theme.title = title || theme.title;
       theme.concept = concept || theme.concept;
       theme.year = year || theme.year;
@@ -321,9 +322,7 @@ router.put(
   }
 );
 
-/* ======================================================
-   ✅ DELETE THEME (cleanup from ImageKit)
-====================================================== */
+// Delete Theme
 router.delete("/:id", async (req, res) => {
   try {
     const theme = await Theme.findByIdAndDelete(req.params.id);
@@ -342,9 +341,8 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-/* ======================================================
-   ✅ GET THEMES by Pandel + Year
-====================================================== */
+// GET THEMES by Pandel + Year
+
 router.get("/pandel/:pandelId/year/:year", async (req, res) => {
   try {
     const { pandelId, year } = req.params;
