@@ -57,7 +57,7 @@ const Home = () => {
           viewport={{ once: true }}
         >
           <img
-            src="https://kenduashantisangha.org/assets/images/artist-details/2021/img-2.jpg"
+            src="https://massart.in/wp-content/uploads/2025/12/DSC07627-scaled.webp"
             alt="Durga Puja Art"
             className="rounded-xl shadow-lg object-cover max-h-[400px]"
           />
