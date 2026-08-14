@@ -39,10 +39,10 @@ const CommiteePhotoGallery = () => {
           const theme = res.data?.[0];
           newThemeImages[year] =
             theme?.mainImage ||
-            "https://massart.in/wp-content/uploads/2024/11/baghbazarbanner-min-scaled.jpg";
+            "/Thumbnil.jpg";
         } catch (err) {
           newThemeImages[year] =
-            "https://massart.in/wp-content/uploads/2024/11/baghbazarbanner-min-scaled.jpg";
+            "/Thumbnil.jpg";
         }
       }
 

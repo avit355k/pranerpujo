@@ -75,7 +75,7 @@ const About = () => {
       {/* Story */}
       <section className="flex flex-col md:flex-row items-center justify-between px-8 md:px-16 lg:px-24 py-16 gap-10">
         <motion.img
-          src="https://kenduashantisangha.org/assets/images/artist-details/2021/img-2.jpg"
+          src="/about.png"
           alt="Durga Puja Art"
           className="w-full md:w-1/2 rounded-xl shadow-lg object-cover max-h-[400px]"
           initial={{ opacity: 0, x: -50 }}
@@ -172,27 +172,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Partners */}
-      <section className="py-16 px-8 md:px-16 lg:px-24 text-center">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 items-center justify-center">
-          {partners.map((partner, idx) => (
-            <motion.div
-              key={idx}
-              className="p-4 rounded-lg flex justify-center items-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: idx * 0.2 }}
-              viewport={{ once: true }}
-            >
-              <img
-                src={partner.logo}
-                alt={partner.name}
-                className="max-h-20 object-contain"
-              />
-            </motion.div>
-          ))}
-        </div>
-      </section>
 
 
     </div>
