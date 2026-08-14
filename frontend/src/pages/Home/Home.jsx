@@ -4,6 +4,10 @@ import Hero from '../../component/Home/Hero/Hero'
 import Featured from '../../component/Home/Featured/Featured'
 import { motion } from "framer-motion";
 
+
+import { RiCameraAiLine,RiCompassDiscoverFill  } from "react-icons/ri";
+import { FaLocationCrosshairs ,FaCarSide} from "react-icons/fa6";
+
 const Home = () => {
   const awardLogos = [
     "https://ik.imagekit.io/avit355k/pandels/Awards/massart.png",
@@ -104,7 +108,9 @@ const Home = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="text-red-500 text-4xl mb-4">📍</div>
+            <div className="text-red-500 text-4xl mb-4 flex items-center justify-center">
+              <RiCompassDiscoverFill className='text-red-500 dark:text-white'/>
+            </div>
             <h2 className="text-xl font-semibold text-neutral-800 dark:text-white">
               Discover Pandals
             </h2>
@@ -122,7 +128,9 @@ const Home = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="text-red-500 text-4xl mb-4">🧭</div>
+            <div className="text-4xl mb-4 text-center flex items-center justify-center">
+              <FaLocationCrosshairs className='text-red-500 dark:text-white'/>
+            </div>
             <h2 className="text-xl font-semibold text-neutral-800 dark:text-white">
               Smart Route Planning
             </h2>
@@ -139,7 +147,9 @@ const Home = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="text-red-500 text-4xl mb-4">🚗</div>
+            <div className="text-red-500 text-4xl mb-4 flex items-center justify-center">
+              <FaCarSide className='text-red-500 dark:text-white'/>
+            </div>
             <h2 className="text-xl font-semibold text-neutral-800 dark:text-white">
               Turn-by-Turn Navigation
             </h2>
@@ -156,7 +166,9 @@ const Home = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="text-red-500 text-4xl mb-4">📸</div>
+            <div className="text-red-500 text-4xl mb-4 flex items-center justify-center">
+              <RiCameraAiLine className='text-red-500 dark:text-white'/>
+            </div>
             <h2 className="text-xl font-semibold text-neutral-800 dark:text-white">
               Photo Gallery
             </h2>

@@ -138,7 +138,7 @@ const Navbar = () => {
               aria-label="Toggle dark mode"
             >
               {darkMode ? (
-                <LightMode className="text-yellow-400" />
+                <LightMode className="text-white" />
               ) : (
                 <DarkMode className="text-gray-700" />
               )}
@@ -153,7 +153,7 @@ const Navbar = () => {
               aria-label="Toggle dark mode"
             >
               {darkMode ? (
-                <LightMode className="text-yellow-400" />
+                <LightMode className="text-amber-100" />
               ) : (
                 <DarkMode className="text-gray-700" />
               )}
@@ -246,4 +246,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default Navbar;

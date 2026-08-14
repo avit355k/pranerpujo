@@ -11,7 +11,7 @@ const BehalaParikrama = () => {
   const [page, setPage] = useState(1);
   const itemsPerPage = 8;
 
-  // ✅ Fetch pandels by zone
+  // Fetch pandels by zone
   useEffect(() => {
     const fetchPandels = async () => {
       try {
@@ -39,7 +39,7 @@ const BehalaParikrama = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // ✅ Paginate pandels
+  // Paginate pandels
   const paginatedPandels = pandels.slice((page - 1) * itemsPerPage, page * itemsPerPage);
 
   return (

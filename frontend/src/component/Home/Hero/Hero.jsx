@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import videoBg from '../../../assets/video/Durga Puja Art.mp4'
 
+import { CiMicrophoneOff, CiMicrophoneOn } from "react-icons/ci";
+
 const Hero = () => {
   const texts = [
     "World Biggest Art Festival",
@@ -9,7 +11,7 @@ const Hero = () => {
     "Join artists, creators, and dreamers in one grand celebration of art."
   ]
 
-  const [index, setIndex] = useState(0)
+  const [index, setIndex] = useState(0);
 
   // Cycle through texts
   useEffect(() => {
@@ -17,7 +19,12 @@ const Hero = () => {
       setIndex((prev) => (prev + 1) % texts.length)
     }, 4000) // change text every 4 seconds
     return () => clearInterval(interval)
-  }, [texts.length])
+  }, [texts.length]);
+
+  const [isMuted, setIsMuted] = useState(false);
+  const toggleSound = () => {
+    setIsMuted((prev) => !prev)
+  };
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
@@ -27,7 +34,7 @@ const Hero = () => {
           className="absolute top-0 left-0 w-full h-full object-cover"
           src={videoBg}
           autoPlay
-          muted
+          muted={isMuted}
           loop
           playsInline
         />
@@ -54,6 +61,13 @@ const Hero = () => {
 
       {/* Bottom gradient */}
       <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black to-transparent"></div>
+
+      <button
+        onClick={toggleSound}
+        className="absolute z-10 bottom-2 right-2   text-white  rounded-full backdrop-blur-md cursor-pointer p-2 transition-all duration-300 hover:scale-110 hover:bg-black/30  "
+      >
+        {isMuted ? <CiMicrophoneOff /> : <CiMicrophoneOn />}
+      </button>
     </section>
   )
 }
