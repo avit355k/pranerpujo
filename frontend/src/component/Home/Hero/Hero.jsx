@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import videoBg from '../../../assets/video/Durga Puja Art.mp4'
 
-import { IoVolumeMediumOutline,IoVolumeMuteOutline } from "react-icons/io5";
+import { IoVolumeMediumOutline, IoVolumeMuteOutline } from "react-icons/io5";
 
 const Hero = () => {
   const texts = [
@@ -22,7 +22,7 @@ const Hero = () => {
   }, [texts.length]);
 
   const [isMuted, setIsMuted] = useState(true);
-  const toggleSound = () => {
+  const toggleSound = async () => {
     setIsMuted((prev) => !prev)
   };
 
