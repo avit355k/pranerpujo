@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import videoBg from '../../../assets/video/Durga Puja Art.mp4'
 
-import { CiMicrophoneOff, CiMicrophoneOn } from "react-icons/ci";
+import { IoVolumeMediumOutline,IoVolumeMuteOutline } from "react-icons/io5";
 
 const Hero = () => {
   const texts = [
@@ -21,7 +21,7 @@ const Hero = () => {
     return () => clearInterval(interval)
   }, [texts.length]);
 
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const toggleSound = () => {
     setIsMuted((prev) => !prev)
   };
@@ -66,7 +66,7 @@ const Hero = () => {
         onClick={toggleSound}
         className="absolute z-10 bottom-2 right-2   text-white  rounded-full backdrop-blur-md cursor-pointer p-2 transition-all duration-300 hover:scale-110 hover:bg-black/30  "
       >
-        {isMuted ? <CiMicrophoneOff /> : <CiMicrophoneOn />}
+        {isMuted ? <IoVolumeMuteOutline /> : <IoVolumeMediumOutline />}
       </button>
     </section>
   )
