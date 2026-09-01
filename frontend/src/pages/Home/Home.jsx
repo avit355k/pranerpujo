@@ -5,8 +5,8 @@ import Featured from '../../component/Home/Featured/Featured'
 import { motion } from "framer-motion";
 
 
-import { RiCameraAiLine,RiCompassDiscoverFill  } from "react-icons/ri";
-import { FaLocationCrosshairs ,FaCarSide} from "react-icons/fa6";
+import { RiCameraAiLine, RiCompassDiscoverFill } from "react-icons/ri";
+import { FaLocationCrosshairs, FaCarSide } from "react-icons/fa6";
 
 const Home = () => {
   const awardLogos = [
@@ -36,14 +36,17 @@ const Home = () => {
           <h1 className="text-3xl font-bold text-red-600">About Us</h1>
 
           <p className="leading-relaxed text-neutral-600 dark:text-neutral-400">
-            The Praner Pujo is a pioneering immersive Interactive user friendly application.
-            Look for arrows and tap or click them to wander around, experiencing the pandal like you are truly there.
-            Enjoy the wonder of exploring each pandal from your screen!
+            <b>Praner Pujo</b> is a pioneering immersive and interactive user-friendly application.
+            Simply look for the arrows and tap or click to wander around, experiencing the pandal as
+            if you were truly there. Enjoy the wonder of exploring each pandal right from your screen!
           </p>
           <p className="leading-relaxed text-neutral-600 dark:text-neutral-400">
-            Experience the finest installation art (pandals) of Kolkata's Durga Puja—acknowledged as an
-            'Intangible Cultural Heritage' by UNESCO—right from your smart device. It's Completely FREE,
-            Compatible with all modern browsers.
+            Experience the finest installation art (pandals) of
+            <b> Kolkata's Durga Puja</b>—recognized as an
+            <b> 'Intangible Cultural Heritage' by UNESCO</b>—directly from your
+            smart device. The app is <b>completely FREE</b> and compatible with
+            all modern browsers, making the magic of Durga Puja accessible
+            anytime, anywhere.
           </p>
           <Link to="/about">
             <button className="px-6 py-3 bg-red-600 text-white rounded-full shadow-md hover:bg-red-700 transition cursor-pointer">
@@ -109,7 +112,7 @@ const Home = () => {
             viewport={{ once: true }}
           >
             <div className="text-red-500 text-4xl mb-4 flex items-center justify-center">
-              <RiCompassDiscoverFill className='text-red-500 dark:text-white'/>
+              <RiCompassDiscoverFill className='text-red-500 dark:text-white' />
             </div>
             <h2 className="text-xl font-semibold text-neutral-800 dark:text-white">
               Discover Pandals
@@ -129,7 +132,7 @@ const Home = () => {
             viewport={{ once: true }}
           >
             <div className="text-4xl mb-4 text-center flex items-center justify-center">
-              <FaLocationCrosshairs className='text-red-500 dark:text-white'/>
+              <FaLocationCrosshairs className='text-red-500 dark:text-white' />
             </div>
             <h2 className="text-xl font-semibold text-neutral-800 dark:text-white">
               Smart Route Planning
@@ -148,7 +151,7 @@ const Home = () => {
             viewport={{ once: true }}
           >
             <div className="text-red-500 text-4xl mb-4 flex items-center justify-center">
-              <FaCarSide className='text-red-500 dark:text-white'/>
+              <FaCarSide className='text-red-500 dark:text-white' />
             </div>
             <h2 className="text-xl font-semibold text-neutral-800 dark:text-white">
               Turn-by-Turn Navigation
@@ -167,7 +170,7 @@ const Home = () => {
             viewport={{ once: true }}
           >
             <div className="text-red-500 text-4xl mb-4 flex items-center justify-center">
-              <RiCameraAiLine className='text-red-500 dark:text-white'/>
+              <RiCameraAiLine className='text-red-500 dark:text-white' />
             </div>
             <h2 className="text-xl font-semibold text-neutral-800 dark:text-white">
               Photo Gallery

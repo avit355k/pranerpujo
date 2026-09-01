@@ -52,16 +52,16 @@ const About = () => {
   return (
     <div className="bg-white dark:bg-black transition-colors duration-300">
       {/* Header */}
-      <section className="relative py-20 px-8 md:px-16 lg:px-24 text-center bg-gradient-to-r from-red-600 to-red-500 text-white">
+      <section className="relative py-20 px-8 md:px-16 lg:px-24 text-center bg-gradient-to-r from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900">
         <motion.h1
-          className="text-4xl md:text-5xl font-bold mb-4"
+          className="text-4xl md:text-5xl font-bold mb-4 text-neutral-800 dark:text-white"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          About Praner Pujo
+          Bringing Kolkata’s Durga Puja Magic to Your Home: <span className="text-red-600">The Story of Praner Pujo</span>
         </motion.h1>
-        <motion.p
+        {/* <motion.p
           className="max-w-2xl mx-auto text-lg text-neutral-100"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -69,7 +69,7 @@ const About = () => {
         >
           Discover the heart of Kolkata’s Durga Puja through immersive digital
           experiences — from interactive pandal tours to award-winning artistry.
-        </motion.p>
+        </motion.p> */}
       </section>
 
       {/* Story */}
@@ -90,15 +90,25 @@ const About = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-bold text-red-600">Our Story</h2>
-          <p>
-            Praner Pujo began as a passion project to bring the magic of Kolkata’s Durga Puja to people everywhere. We wanted to create a way for devotees, art lovers, and cultural enthusiasts to experience the grandeur of
-            pandals from their homes.What started as a simple idea evolved into a full-fledged immersive platform
-            showcasing the best of art, devotion, and culture. Our team works tirelessly to curate experiences that
-            celebrate both tradition and technology.
+          {/* <h2 className="text-3xl font-bold text-red-600">Our Story</h2> */}
+          <p className="leading-relaxed text-neutral-600 dark:text-neutral-400">
+            There’s something truly special about Durga Puja in Kolkata—the vibrant colors, the intricate artistry of the pandals,
+            and the deep sense of devotion that fills the air. For many, it’s not just a festival,
+            but a heartfelt celebration of culture and community. This year, if you can’t be there in person,
+            don’t worry—Praner Pujo is here to bring that magic right to your doorstep, no matter where you are in the world.
           </p>
+          <br />
+          <p className="leading-relaxed text-neutral-600 dark:text-neutral-400">
+            What started as a simple passion project has blossomed into a full-fledged immersive experience.
+            The founders of Praner Pujo wanted to share the grandeur of Kolkata’s iconic Durga Puja pandals beyond geographical
+            boundaries. Their vision was to create a platform where devotees, art lovers, and culture enthusiasts could
+            come together to celebrate tradition, even from afar.
+          </p>
+          <br/>
+          
         </motion.div>
       </section>
+      
 
       {/* Statistical Attributes */}
       <section className="py-16 bg-neutral-100 dark:bg-neutral-900 px-8 md:px-16 lg:px-24 text-center">
