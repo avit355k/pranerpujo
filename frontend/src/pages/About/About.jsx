@@ -54,7 +54,7 @@ const About = () => {
       {/* Header */}
       <section className="relative py-20 px-8 md:px-16 lg:px-24 text-center bg-gradient-to-r from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900">
         <motion.h1
-          className="text-4xl md:text-5xl font-bold mb-4 text-neutral-800 dark:text-white"
+          className="text-4xl md:text-5xl font-bold mb-4 text-neutral-800 dark:text-white italic"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -71,44 +71,66 @@ const About = () => {
           experiences — from interactive pandal tours to award-winning artistry.
         </motion.p> */}
       </section>
-
       {/* Story */}
-      <section className="flex flex-col md:flex-row items-center justify-between px-8 md:px-16 lg:px-24 py-16 gap-10">
-        <motion.img
-          src="/about.png"
-          alt="Durga Puja Art"
-          className="w-full md:w-1/2 rounded-xl shadow-lg object-cover max-h-[400px]"
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        />
+      <section className="px-8 md:px-16 lg:px-24 py-8">
         <motion.div
-          className="md:w-1/2 space-y-4 text-neutral-700 dark:text-neutral-300"
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
+          className="text-neutral-700 dark:text-neutral-300"
         >
-          {/* <h2 className="text-3xl font-bold text-red-600">Our Story</h2> */}
-          <p className="leading-relaxed text-neutral-600 dark:text-neutral-400">
-            There’s something truly special about Durga Puja in Kolkata—the vibrant colors, the intricate artistry of the pandals,
-            and the deep sense of devotion that fills the air. For many, it’s not just a festival,
-            but a heartfelt celebration of culture and community. This year, if you can’t be there in person,
-            don’t worry—Praner Pujo is here to bring that magic right to your doorstep, no matter where you are in the world.
-          </p>
-          <br />
-          <p className="leading-relaxed text-neutral-600 dark:text-neutral-400">
-            What started as a simple passion project has blossomed into a full-fledged immersive experience.
-            The founders of Praner Pujo wanted to share the grandeur of Kolkata’s iconic Durga Puja pandals beyond geographical
-            boundaries. Their vision was to create a platform where devotees, art lovers, and culture enthusiasts could
-            come together to celebrate tradition, even from afar.
-          </p>
-          <br/>
-          
+          {/* Floated image — text wraps around it */}
+          <div className="float-left w-full sm:w-1/2 md:w-2/5 mr-8 mb-4">
+            <div className="w-full  sm:h-[280px] md:h-[310px] overflow-hidden rounded-xl shadow-lg">
+              <img
+                src="/about.webp"
+                alt="Durga Puja Art"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-6">
+            <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 italic">
+              Bringing Kolkata’s Durga Puja Magic to Your Home: The Story of Praner Pujo
+              There’s something truly special about Durga Puja in Kolkata—the vibrant colors,
+              the intricate artistry of the pandals, and the deep sense of devotion that fills
+              the air. For many, it’s not just a festival, but a heartfelt celebration of culture
+              and community. This year, if you can’t be there in person, don’t worry—Praner Pujo
+              is here to bring that magic right to your doorstep, no matter where you are in the world.
+            </p>
+
+            <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 italic">
+              What started as a simple passion project has blossomed into a full-fledged immersive experience.
+              The founders of Praner Pujo wanted to share the grandeur of Kolkata’s iconic Durga Puja pandals
+              beyond geographical boundaries. Their vision was to create a platform where devotees, art lovers,
+              and culture enthusiasts could come together to celebrate tradition, even from afar.
+            </p>
+
+            {/* This paragraph runs the full width, once the floated image has ended above it */}
+            <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 clear-left italic">
+              Behind the scenes, a dedicated team works tirelessly to curate experiences that blend the richness of age-old
+              customs with the possibilities of modern technology. The result is an accessible, immersive celebration that
+              showcases the best of art, devotion, and cultural heritage. Whether you’re admiring the stunning artistry of
+              the pandals, soaking in devotional rituals, or simply enjoying the festive spirit, Praner Pujo offers a
+              unique way to connect with the festival’s heart and soul.
+            </p>
+
+            <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 italic">
+              It’s this seamless fusion of tradition and innovation that makes Praner Pujo stand out—not
+              just a digital event, but a heartfelt celebration that honors the essence of Durga Puja.
+              So, whether you're near or far, this platform invites you to experience the joy,
+              creativity, and devotion that define one of India’s most beloved festivals.
+              Stay tuned for more updates and immersive experiences from Praner Pujo as they continue to
+              bring the spirit of Kolkata’s Durga Puja alive in new and exciting ways. Until then,
+              let’s celebrate the festival with the same passion and warmth that has inspired this
+              wonderful initiative!
+            </p>
+          </div>
         </motion.div>
       </section>
-      
+
 
       {/* Statistical Attributes */}
       <section className="py-16 bg-neutral-100 dark:bg-neutral-900 px-8 md:px-16 lg:px-24 text-center">
@@ -136,53 +158,6 @@ const About = () => {
           ))}
         </div>
       </section>
-
-      {/* Testimonials Section (replacing Team) */}
-      <section className="py-16 px-8 md:px-16 lg:px-24 bg-white dark:bg-black text-center">
-        <motion.h2
-          className="text-3xl font-bold text-red-600 mb-10 capitalize"
-          initial={{ opacity: 0, y: -30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          Testimonials
-        </motion.h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((t, i) => (
-            <motion.div
-              key={i}
-              className="p-6 bg-gray-50 dark:bg-neutral-900 rounded-xl shadow-md hover:shadow-lg transition text-left"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: i * 0.2 }}
-              viewport={{ once: true }}
-            >
-              <p className="text-neutral-700 dark:text-neutral-300 mb-6 leading-relaxed">
-                {t.text}
-              </p>
-              <div className="flex items-center gap-4">
-                <img
-                  src={t.img}
-                  alt={t.name}
-                  className="w-12 h-12 rounded-full object-cover"
-                />
-                <div>
-                  <h4 className="font-semibold text-black dark:text-white">
-                    - {t.name.toLowerCase()}
-                  </h4>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                    {t.title}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-
 
     </div>
   );

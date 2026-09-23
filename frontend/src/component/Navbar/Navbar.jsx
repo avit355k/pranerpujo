@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { IconButton } from '@mui/material'
 import { LightMode, DarkMode, Menu, Close } from '@mui/icons-material'
 import { FaAngleUp, FaAngleDown } from "react-icons/fa";
-import logo from '../../assets/logo/pplogo.png'
+import logo from '../../assets/logo/logo.svg'
 
 
 const navLinks = [

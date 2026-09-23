@@ -18,7 +18,7 @@ const Home = () => {
     "https://www.bergerpriyopujo.com/images/logo.png",
     "https://images.news18.com/dlxczavtqcctuei/news18/static/images/news18bengali-logo.svg",
     "https://www.nerolac.com/SheraParaSheraPujo/images/spsp-banner-image.png",
-    "https://www.indianfestivaldiary.com/durgapuja/awards/narayani_namastute/narayani_namastute.jpg",
+    
   ];
 
   return (
@@ -35,12 +35,12 @@ const Home = () => {
         >
           <h1 className="text-3xl font-bold text-red-600">About Us</h1>
 
-          <p className="leading-relaxed text-neutral-600 dark:text-neutral-400">
+          <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 italic">
             <b>Praner Pujo</b> is a pioneering immersive and interactive user-friendly application.
             Simply look for the arrows and tap or click to wander around, experiencing the pandal as
             if you were truly there. Enjoy the wonder of exploring each pandal right from your screen!
           </p>
-          <p className="leading-relaxed text-neutral-600 dark:text-neutral-400">
+          <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 italic">
             Experience the finest installation art (pandals) of
             <b> Kolkata's Durga Puja</b>—recognized as an
             <b> 'Intangible Cultural Heritage' by UNESCO</b>—directly from your

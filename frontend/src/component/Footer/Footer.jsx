@@ -2,93 +2,311 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaFacebook, FaTwitter, FaInstagram, FaGithub } from "react-icons/fa";
 
+const FooterLink = ({ to, children }) => {
+  return (
+    <Link
+      to={to}
+      className="
+        block
+        text-sm
+        text-white/65
+        hover:text-white
+        hover:translate-x-1
+        transition-all
+        duration-200
+      "
+    >
+      {children}
+    </Link>
+  );
+};
+
+const FooterColumn = ({ title, children }) => {
+  return (
+    <div>
+      <h3 className="mb-5 text-sm font-semibold uppercase tracking-wider text-white">
+        {title}
+      </h3>
+
+      <div className="flex flex-col gap-3">
+        {children}
+      </div>
+    </div>
+  );
+};
+
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 dark:bg-neutral-900 text-gray-700 dark:text-gray-300 py-10 transition-colors duration-300">
-      <div className="max-w-6xl mx-auto px-6 md:px-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+    <footer className="relative overflow-hidden min-h-125 bg-neutral-900 text-white">
+      {/* Background Image */}
+      <div
+        className="
+          absolute
+          inset-0
+          bg-cover
+          bg-center
+          bg-no-repeat
+        "
+        style={{
+          backgroundImage: "url('/footer_bg.webp')",
+        }}
+      />
 
-        {/* Brand / About Section */}
-        <div>
-          <h2 className="text-2xl font-bold text-red-600 mb-2">PranerPujo</h2>
-          <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-            Celebrate Durga Puja like never before. Discover pandals, plan
-            routes, and share your festive experiences with the community.
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-neutral-950/50 dark:bg-neutral-950/75" />
+
+      {/* Top Gradient */}
+      <div
+        className="
+          absolute
+          inset-x-0
+          top-0
+          h-40
+          bg-linear-to-b
+          from-neutral-950/80
+          to-transparent
+        "
+      />
+
+      {/* ================= CONTENT ================= */}
+      <div
+        className="
+          relative
+          z-10
+          mx-auto
+          max-w-7xl
+          px-6
+          sm:px-8
+          lg:px-12
+          pt-16
+          pb-8
+        "
+      >
+        {/* ================= MAIN FOOTER GRID ================= */}
+        <div
+          className="
+            grid
+            grid-cols-2
+            sm:grid-cols-3
+            lg:grid-cols-[1.6fr_1fr_1fr_1fr_1fr_1fr]
+            gap-x-8
+            gap-y-12
+          "
+        >
+          {/* ================= BRAND ================= */}
+          <div
+            className="
+              col-span-2
+              sm:col-span-3
+              lg:col-span-1
+              max-w-70
+            "
+          >
+            {/* Logo */}
+            <Link to="/" className="inline-block mb-4">
+              <img
+                src="/logo.svg"
+                alt="Praner Pujo"
+                className="
+                  h-12
+                  w-auto
+                  object-contain
+                "
+              />
+            </Link>
+
+            {/* Description */}
+            <p
+              className="
+                max-w-67.5
+                text-sm
+                leading-6
+                text-white/75
+              "
+            >
+              Celebrate Durga Puja like never before. Discover pandals, plan
+              routes, and share your festive experiences with the community.
+            </p>
+
+            {/* Social Icons */}
+            <div className="mt-5 flex items-center gap-4">
+              <a
+                href="#"
+                aria-label="Facebook"
+                className="
+                  text-white/60
+                  hover:text-white
+                  hover:-translate-y-1
+                  transition-all
+                  duration-200
+                "
+              >
+                <FaFacebook size={21} />
+              </a>
+
+              <a
+                href="#"
+                aria-label="Twitter"
+                className="
+                  text-white/60
+                  hover:text-white
+                  hover:-translate-y-1
+                  transition-all
+                  duration-200
+                "
+              >
+                <FaTwitter size={21} />
+              </a>
+
+              <a
+                href="#"
+                aria-label="Instagram"
+                className="
+                  text-white/60
+                  hover:text-white
+                  hover:-translate-y-1
+                  transition-all
+                  duration-200
+                "
+              >
+                <FaInstagram size={21} />
+              </a>
+
+              <a
+                href="#"
+                aria-label="Github"
+                className="
+                  text-white/60
+                  hover:text-white
+                  hover:-translate-y-1
+                  transition-all
+                  duration-200
+                "
+              >
+                <FaGithub size={21} />
+              </a>
+            </div>
+          </div>
+
+          {/* ================= EXPLORE ================= */}
+          <FooterColumn title="Explore">
+            <FooterLink to="/">Map</FooterLink>
+
+            <FooterLink to="/parikrama">
+              Parikrama
+            </FooterLink>
+
+            <FooterLink to="/gallery/photos">
+              Gallery
+            </FooterLink>
+          </FooterColumn>
+
+          {/* ================= PARIKRAMA ================= */}
+          <FooterColumn title="Parikrama">
+            <FooterLink to="/parikrama/by-zone">
+              By Zone
+            </FooterLink>
+
+            <FooterLink to="/parikrama/bonedi-bari">
+              Bonedi Bari
+            </FooterLink>
+          </FooterColumn>
+
+          {/* ================= ZONES ================= */}
+          <FooterColumn title="Zones">
+            <FooterLink to="/parikrama/by-zone/north-kolkata">
+              North Kolkata
+            </FooterLink>
+
+            <FooterLink to="/parikrama/by-zone/south-kolkata">
+              South Kolkata
+            </FooterLink>
+
+            <FooterLink to="/parikrama/by-zone/northeast-kolkata">
+              North East Kolkata
+            </FooterLink>
+
+            <FooterLink to="/parikrama/by-zone/central-kolkata">
+              Central Kolkata
+            </FooterLink>
+
+            <FooterLink to="/parikrama/by-zone/behala-kolkata">
+              Behala & West Kolkata
+            </FooterLink>
+
+            <FooterLink to="/parikrama/by-zone/haridevpur-kolkata">
+              Haridevpur & Others
+            </FooterLink>
+          </FooterColumn>
+
+          {/* ================= DISCOVER ================= */}
+          <FooterColumn title="Discover">
+            <FooterLink to="/awards">
+              Awards
+            </FooterLink>
+
+            <FooterLink to="/metro">
+              Metro
+            </FooterLink>
+          </FooterColumn>
+
+          {/* ================= INFORMATION ================= */}
+          <FooterColumn title="Information">
+            <FooterLink to="/about">
+              About
+            </FooterLink>
+          </FooterColumn>
+        </div>
+
+        {/* ================= BOTTOM BAR ================= */}
+        <div
+          className="
+            mt-14
+            pt-6
+            border-t
+            border-white/20
+            flex
+            flex-col
+            sm:flex-row
+            items-center
+            justify-between
+            gap-4
+          "
+        >
+          {/* Copyright */}
+          <p className="text-xs sm:text-sm text-white/60">
+            © {new Date().getFullYear()} Praner Pujo. All rights reserved.
           </p>
 
-          {/* Social Icons */}
-          <div className="flex gap-4 mt-4">
-            <a
-              href="https://www.facebook.com/share/1D2pQB5dQd/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-500 dark:text-gray-400 hover:text-red-600 transition"
-              aria-label="Facebook"
+          {/* Legal Links */}
+          <div className="flex items-center gap-5">
+            <Link
+              to="/privacy"
+              className="
+                text-xs
+                sm:text-sm
+                text-white/60
+                hover:text-white
+                transition-colors
+              "
             >
-              <FaFacebook size={20} />
-            </a>
+              Privacy
+            </Link>
 
-            <a
-              href="#"
-              className="text-gray-500 dark:text-gray-400 hover:text-red-600 transition"
-              aria-label="Twitter"
+            <Link
+              to="/terms"
+              className="
+                text-xs
+                sm:text-sm
+                text-white/60
+                hover:text-white
+                transition-colors
+              "
             >
-              <FaTwitter size={20} />
-            </a>
-
-            <a
-              href="https://instagram.com/pranerpujo"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-500 dark:text-gray-400 hover:text-red-600 transition"
-              aria-label="Instagram"
-            >
-              <FaInstagram size={20} />
-            </a>
-
-            <a
-              href="https://github.com/avit355k"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-500 dark:text-gray-400 hover:text-red-600 transition"
-              aria-label="GitHub"
-            >
-              <FaGithub size={20} />
-            </a>
+              Terms
+            </Link>
           </div>
         </div>
-
-        {/* Quick Links */}
-        <div>
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3">
-            Quick Links
-          </h3>
-          <ul className="space-y-2 text-sm">
-            <li><Link to="/" className="hover:text-red-500 transition">Home</Link></li>
-            <li><Link to="/about" className="hover:text-red-500 transition">About Us</Link></li>
-            <li><Link to="/parikrama" className="hover:text-red-500 transition">Parikrama</Link></li>
-            <li><Link to="/schedule" className="hover:text-red-500 transition">Schedule</Link></li>
-            <li><Link to="/artists" className="hover:text-red-500 transition">Artists</Link></li>
-            <li><Link to="/awards" className="hover:text-red-500 transition">Awards</Link></li>
-          </ul>
-        </div>
-
-        {/* Resources */}
-        <div>
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3">
-            Resources
-          </h3>
-          <ul className="space-y-2 text-sm">
-            <li><Link to="/faq" className="hover:text-red-500 transition">FAQs</Link></li>
-            <li><Link to="/privacy" className="hover:text-red-500 transition">Privacy Policy</Link></li>
-            <li><Link to="/terms" className="hover:text-red-500 transition">Terms & Conditions</Link></li>
-          </ul>
-        </div>
-
-      </div>
-
-      {/* Bottom Footer */}
-      <div className="border-t border-gray-300 dark:border-neutral-700 mt-10 pt-6 text-center text-sm text-gray-600 dark:text-gray-400">
-        © {new Date().getFullYear()} <span className="text-red-600 font-semibold">PranerPujo</span>. All rights reserved.
       </div>
     </footer>
   );

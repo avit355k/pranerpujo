@@ -17,12 +17,12 @@ import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 
 const YearWisePhotoGallery = () => {
-  const { id, year } = useParams(); // ✅ Both id and year come from URL
+  const { id, year } = useParams(); //  Both id and year come from URL
   const [pandel, setPandel] = useState(null);
   const [photos, setPhotos] = useState([]);
   const [index, setIndex] = useState(-1);
 
-  // ✅ Fetch Pandel Details
+  //  Fetch Pandel Details
   useEffect(() => {
     const fetchPandel = async () => {
       try {
@@ -44,7 +44,7 @@ const YearWisePhotoGallery = () => {
     });
   };
 
-  // ✅ Fetch Year-wise Photos
+  // Fetch Year-wise Photos
 useEffect(() => {
   const fetchGalleryPhotos = async () => {
     try {
@@ -103,7 +103,7 @@ useEffect(() => {
         <div className="w-full h-1 bg-red-600 rounded"></div>
       </div>
 
-      {/* ✅ Gallery Section */}
+      {/*  Gallery Section */}
       <div className="overflow-hidden shadow-sm bg-gray-50 dark:bg-black p-3 sm:p-6">
         {photos.length > 0 ? (
           <>

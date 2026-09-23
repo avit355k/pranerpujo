@@ -39,10 +39,10 @@ const CommiteePhotoGallery = () => {
           const theme = res.data?.[0];
           newThemeImages[year] =
             theme?.mainImage ||
-            "/Thumbnil.jpg";
+            "/Thumbnil.webp";
         } catch (err) {
           newThemeImages[year] =
-            "/Thumbnil.jpg";
+            "/Thumbnil.webp";
         }
       }
 
