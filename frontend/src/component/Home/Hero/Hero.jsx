@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from "motion/react"
 import videoBg from '../../../assets/video/Durga Puja Art.mp4'
 
 import { IoVolumeMediumOutline, IoVolumeMuteOutline } from "react-icons/io5";
@@ -60,7 +60,7 @@ const Hero = () => {
       </div>
 
       {/* Bottom gradient */}
-      <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black to-transparent"></div>
+      <div className="absolute bottom-0 left-0 w-full h-10 bg-gradient-to-t from-black/90 to-transparent "></div>
 
       <button
         onClick={toggleSound}

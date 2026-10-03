@@ -10,6 +10,7 @@ import {
 import L from "leaflet";
 import axios from "axios";
 import { API } from "../../services/api";
+
 import { IoLocationSharp, IoAddCircle } from "react-icons/io5";
 import { IoIosSearch } from "react-icons/io";
 import { MdGpsFixed } from "react-icons/md";
@@ -17,17 +18,23 @@ import { FaTrashAlt, FaMap } from "react-icons/fa";
 import { BsGridFill } from "react-icons/bs";
 import { AiOutlineDrag } from "react-icons/ai";
 
-import googlePin from "/gps.png";
+import { useNavigate } from "react-router-dom";
 
-// ✅ Custom Marker Icon
-const customIcon = new L.Icon({
-  iconUrl: googlePin,
-  iconSize: [35, 40],
-  iconAnchor: [17, 34],
-  popupAnchor: [1, -30],
-});
+//  Custom Marker Icon
+const makeIcon = (url) =>
+  new L.Icon({
+    iconUrl: url,
+    iconSize: [35, 40],
+    iconAnchor: [17, 34],
+    popupAnchor: [1, -30],
+  });
 
-// ✅ FitBounds Component
+const typeIcons = {
+  Barowari: makeIcon("/icons/gps.svg"),
+  "Bonedi Bari": makeIcon("/icons/Bonedi.svg"),
+};
+
+//  FitBounds Component
 const FitBounds = ({ routeCoords }) => {
   const map = useMap();
   useEffect(() => {
@@ -39,7 +46,48 @@ const FitBounds = ({ routeCoords }) => {
   return null;
 };
 
+const FlyToResults = ({ pandals, searchTerm }) => {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!searchTerm.trim()) return;
+
+    const points = pandals
+      .filter((p) => p.location?.latitude && p.location?.longitude)
+      .map((p) => [p.location.latitude, p.location.longitude]);
+
+    if (points.length === 0) return;
+
+    // Debounce so typing "dur..." doesn't fly on every keystroke
+    const timer = setTimeout(() => {
+      if (points.length === 1) {
+        map.flyTo(points[0], 17, { duration: 1.2 });
+      } else {
+        map.flyToBounds(L.latLngBounds(points), {
+          padding: [60, 60],
+          maxZoom: 17,
+          duration: 1.2,
+        });
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [pandals, searchTerm, map]);
+
+  return null;
+};
+
+// Used for the user's current/searched starting point
+const startIcon = makeIcon("/icons/gps.svg");
+
+const PUJA_TYPES = [
+  { key: "Barowari", label: "Barowari", icon: "/icons/gps.svg" },
+  { key: "Bonedi Bari", label: "Bonedi Bari", icon: "/icons/Bonedi.svg" },
+];
+
 const Map = () => {
+  const navigate = useNavigate();
+
   const [pandals, setPandals] = useState([]);
   const [filteredPandals, setFilteredPandals] = useState([]);
   const [myList, setMyList] = useState([]);
@@ -53,10 +101,11 @@ const Map = () => {
   const [showOptimization, setShowOptimization] = useState(false);
   const [optimizing, setOptimizing] = useState(false);
   const [optimizedOrder, setOptimizedOrder] = useState([]);
+  const [activeTypes, setActiveTypes] = useState(["Barowari", "Bonedi Bari"]);
 
-  const center = [22.5726, 88.3639]; // Kolkata
+  const center = [22.590235, 88.363879]; // Kolkata
 
-  // ✅ Fetch pandals
+  //  Fetch pandals
   useEffect(() => {
     fetch(`${API}/api/pandel`)
       .then((res) => res.json())
@@ -67,27 +116,33 @@ const Map = () => {
       .catch((err) => console.error("Error fetching pandals:", err));
   }, []);
 
-  // ✅ Filter by name
+  const toggleType = (type) => {
+    setActiveTypes((prev) =>
+      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+    );
+  };
+
+  // Filter by name
   useEffect(() => {
     const filtered = pandals.filter((p) =>
-      p.name.toLowerCase().includes(searchTerm.toLowerCase())
+      p.name.toLowerCase().includes(searchTerm.toLowerCase()) && activeTypes.includes(p.type)
     );
     setFilteredPandals(filtered);
-  }, [searchTerm, pandals]);
+  }, [searchTerm, pandals, activeTypes]);
 
-  // ✅ Add to list
+  //  Add to list
   const handleAddToList = (pandal) => {
     if (!myList.find((p) => p._id === pandal._id)) {
       setMyList([...myList, pandal]);
     }
   };
 
-  // ✅ Remove from list
+  //  Remove from list
   const handleRemove = (id) => {
     setMyList(myList.filter((p) => p._id !== id));
   };
 
-  // ✅ Current location
+  // Current location
   const handleCurrentLocation = () => {
     if (!navigator.geolocation) {
       alert("Geolocation not supported by your browser.");
@@ -113,7 +168,7 @@ const Map = () => {
     );
   };
 
-  // ✅ Search address
+  //  Search address
   const handleSearchAddress = async () => {
     if (!startLocation.trim()) return alert("Enter an address to search.");
     setLoadingAddress(true);
@@ -153,7 +208,7 @@ const Map = () => {
     }
   };
 
-  // ✅ Normal route
+  //  Normal route
   const getRoute = async () => {
     if (myList.length < 2) {
       setRouteCoords([]);
@@ -186,7 +241,7 @@ const Map = () => {
     getRoute();
   }, [myList]);
 
-  // ✅ Toggle between Map and Optimization view
+  //  Toggle between Map and Optimization view
   const handleToggleView = async () => {
     if (!showOptimization && myList.length > 2) {
       await handleOptimizeRoute();
@@ -194,7 +249,7 @@ const Map = () => {
     setShowOptimization((prev) => !prev);
   };
 
-  // ✅ Route Optimization using GraphHopper
+  //  Route Optimization using GraphHopper
   const handleOptimizeRoute = async () => {
     if (myList.length < 2) return alert("Add at least 2 pandals to optimize.");
 
@@ -375,67 +430,92 @@ const Map = () => {
       {/* === Right Section === */}
       <div className="lg:w-2/3 w-full relative">
         {!showOptimization ? (
-          // ✅ Map Section
-          <MapContainer
-            center={currentLocation || center}
-            zoom={12}
-            style={{
-              height: "500px",
-              borderRadius: "1rem",
-              zIndex: 0,
-            }}
-          >
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; OpenStreetMap contributors'
-            />
+
+          <div className="relative">
+            {/* Type filter chips */}
+            <div className="absolute top-3 right-3 z-[1000] flex gap-2">
+              {PUJA_TYPES.map(({ key, label, icon }) => {
+                const active = activeTypes.includes(key);
+                return (
+                  <button
+                    key={key}
+                    onClick={() => toggleType(key)}
+                    className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold shadow-md border transition-all cursor-pointer ${active
+                      ? "bg-white text-red-600 border-red-500"
+                      : "bg-white/90 text-gray-500 border-gray-300 opacity-70 hover:opacity-100"
+                      }`}
+                  >
+                    <img src={icon} alt="" className="w-4 h-4" />
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
 
 
+            <MapContainer
+              center={currentLocation || center}
+              zoom={16}
+              style={{ height: "500px", borderRadius: "1rem", zIndex: 0 }}
+            >
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; OpenStreetMap contributors'
+              />
+              <FlyToResults pandals={filteredPandals} searchTerm={searchTerm} />
+              
+              {filteredPandals
+                .filter((p) => p.location?.latitude && p.location?.longitude)
+                .map((p) => (
+                  <Marker
+                    key={p._id}
+                    position={[p.location.latitude, p.location.longitude]}
+                    icon={typeIcons[p.type] || typeIcons.Barowari}
+                  >
+                    <Popup minWidth={180} maxWidth={180}>
+                      <div className=" w-[180px] text-sm">
+                        <div
+                          onClick={() => navigate(`/puja-details/${p._id}`)}
+                          className="cursor-pointer group"
+                          title={p.name}
+                        >
+                          <h3 className="font-bold mb-1 truncate ">{p.name}</h3>
+                          {p.logo && (
+                            <img
+                              src={p.logo}
+                              alt={p.name}
+                              className="w-full h-20 object-cover rounded mb-2 "
+                            />
+                          )}
+                        </div>
 
-            {filteredPandals
-              .filter((p) => p.location?.latitude && p.location?.longitude)
-              .map((p) => (
-                <Marker
-                  key={p._id}
-                  position={[p.location.latitude, p.location.longitude]}
-                  icon={customIcon}
-                >
-                  <Popup>
-                    <div className="text-sm">
-                      <h3 className="font-bold mb-1">{p.name}</h3>
-                      {p.logo && (
-                        <img
-                          src={p.logo}
-                          alt={p.name}
-                          className="w-full h-20 object-cover rounded mb-2"
-                        />
-                      )}
-                      <button
-                        onClick={() => handleAddToList(p)}
-                        className="flex gap-2 items-center bg-red-600 text-white w-full text-xs px-2 py-1 rounded hover:bg-red-700 cursor-pointer"
-                      >
-                        <IoAddCircle size={20} /> Add to My List
-                      </button>
-                    </div>
-                  </Popup>
+                        <button
+                          onClick={() => handleAddToList(p)}
+                          className="flex gap-2 items-center bg-red-600 text-white w-full text-xs px-2 py-1 rounded hover:bg-red-700 cursor-pointer"
+                        >
+                          <IoAddCircle size={20} /> Add to My List
+                        </button>
+                      </div>
+                    </Popup>
+                  </Marker>
+                ))}
+
+              {currentLocation && (
+                <Marker position={currentLocation} icon={startIcon}>
+                  <Popup>Starting Point</Popup>
                 </Marker>
-              ))}
+              )}
 
-            {currentLocation && (
-              <Marker position={currentLocation} icon={customIcon}>
-                <Popup>Starting Point</Popup>
-              </Marker>
-            )}
-
-            {routeCoords.length > 0 && (
-              <>
-                <Polyline positions={routeCoords} color="red" weight={4} />
-                <FitBounds routeCoords={routeCoords} />
-              </>
-            )}
-          </MapContainer>
+              {routeCoords.length > 0 && (
+                <>
+                  <Polyline positions={routeCoords} color="red" weight={4} />
+                  <FitBounds routeCoords={routeCoords} />
+                </>
+              )}
+            </MapContainer>
+          </div>
         ) : (
-          // ✅ Optimization Section
+          //  Optimization Section
           <div className="bg-white dark:bg-neutral-950 p-6 rounded-2xl shadow-md min-h-[500px] flex flex-col justify-center items-center text-gray-800 dark:text-white">
             <h2 className="text-3xl text-red-600 font-bold mb-6">Optimized Route Order</h2>
 

@@ -71,7 +71,7 @@ const Artists = () => {
         Artist Collection
       </h1>
 
-      {/* 🔍 Search Section */}
+      {/* Search Section */}
       <div className="flex flex-col sm:flex-row justify-center items-center mb-6 w-full mx-auto border rounded-md overflow-hidden shadow-sm">
         <button
           onClick={handleSearchClick}
@@ -89,7 +89,7 @@ const Artists = () => {
         />
       </div>
 
-      {/* 📋 Artist List Table */}
+      {/* Artist List Table */}
       <div className="overflow-x-auto rounded-lg shadow">
         <table className="w-full border-collapse text-sm md:text-base">
           <thead>
@@ -136,7 +136,7 @@ const Artists = () => {
         </table>
       </div>
 
-      {/* 🔝 Go to Top Button */}
+      {/* Go to Top Button */}
       {showTopBtn && (
         <button
           onClick={scrollToTop}

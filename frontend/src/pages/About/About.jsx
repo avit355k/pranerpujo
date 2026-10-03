@@ -1,52 +1,13 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 const About = () => {
-  const partners = [
-    {
-      name: "MassArt",
-      logo: "https://massart.in/wp-content/uploads/elementor/thumbs/logo-qr9acsclmd2q8595b59ahdtqo7khqr635qvufs4m36.png",
-    },
-    {
-      name: "UNESCO",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Logo_UNESCO_2021.svg/1200px-Logo_UNESCO_2021.svg.png",
-    },
-    {
-      name: "Asian Paints",
-      logo: "https://static.asianpaints.com/etc.clientlibs/apcolourcatalogue/clientlibs/clientlib-global-unification/resources/images/header/asian-paints-logo.webp",
-    },
-    {
-      name: "British Council",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/British_Council_logo.svg/300px-British_Council_logo.svg.png?20150524171749",
-    },
-  ];
-
+ 
   const stats = [
     { value: "25+ million", label: "visitors" },
     { value: "2300+ site", label: "specific Art installations" },
     { value: "80,000 cr+", label: "industry" },
     { value: "2 lacs+", label: "artisans engaged for livelihood" },
-  ];
-
-  const testimonials = [
-    {
-      text: "Durga Puja is basically a very religious festival. There is an addition to the religious element of the festival which now comes with modern Art. I find this Art very interesting because it shows how alive and vibrant this festival is. Maybe this is the biggest folk Art, street Art festival in the world and it goes beyond the worshiping aspects. MassArt, I must say, is to be praised and commended for this addition to the traditional Durga Puja.",
-      name: "Dr. Philipp Ackermann",
-      title: "Ambassador of Germany to India",
-      img: "https://massart.in/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-03-at-11.46.10_04e51236.jpg",
-    },
-    {
-      text: "What I believe would be wonderful is to take these pavilions to other places of the world, because the world is going to be totally in love with these pandals. They are fascinating. I understand that they are not made in this way anywhere else in India. So this is a mystery that you have to come to Kolkata to see.",
-      name: "Andre Aranha Correa do Lago",
-      title: "Ambassador of Brazil",
-      img: "https://massart.in/wp-content/uploads/2024/12/Untitled-3.jpg",
-    },
-    {
-      text: "Perhaps in another life, Shakespeare in Stratford would be writing about Calcutta and the City of Joy — and Durga Puja and its joy.",
-      name: "Jonathan Kennedy",
-      title: "Director, Arts India British Council",
-      img: "https://massart.in/wp-content/uploads/2024/12/g.jpg",
-    },
   ];
 
   return (
@@ -61,15 +22,7 @@ const About = () => {
         >
           Bringing Kolkata’s Durga Puja Magic to Your Home: <span className="text-red-600">The Story of Praner Pujo</span>
         </motion.h1>
-        {/* <motion.p
-          className="max-w-2xl mx-auto text-lg text-neutral-100"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        >
-          Discover the heart of Kolkata’s Durga Puja through immersive digital
-          experiences — from interactive pandal tours to award-winning artistry.
-        </motion.p> */}
+
       </section>
       {/* Story */}
       <section className="px-8 md:px-16 lg:px-24 py-8">
