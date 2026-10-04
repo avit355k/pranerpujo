@@ -1,3 +1,18 @@
+@import url("https://api.fontshare.com/v2/css?f[]=kalam@300,400,700&f[]=amulya@400,500,700&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=synonym@300,400,500,600&display=swap");
+
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Define custom font families */
+@theme {
+  /* Headings and highlights */
+  --font-display: "Amulya", sans-serif;
+
+  /* Body paragraphs and subtitles */
+  --font-synonym: "Synonym", sans-serif;
+
+  /* Key/accent text */
+  --font-typograph: "Kalam", cursive;
+}

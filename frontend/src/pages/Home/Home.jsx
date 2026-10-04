@@ -77,14 +77,14 @@ const Home = () => {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-3xl font-bold text-red-600">About Us</h1>
+          <h1 className="text-3xl font-display font-bold text-red-600">About Us</h1>
 
-          <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 italic">
+          <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 font-synonym">
             <b>Praner Pujo</b> is a pioneering immersive and interactive user-friendly application.
             Simply look for the arrows and tap or click to wander around, experiencing the pandal as
             if you were truly there. Enjoy the wonder of exploring each pandal right from your screen!
           </p>
-          <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 italic">
+          <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 font-synonym">
             Experience the finest installation art (pandals) of
             <b> Kolkata's Durga Puja</b>—recognized as an
             <b> 'Intangible Cultural Heritage' by UNESCO</b>—directly from your
@@ -155,16 +155,16 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="mb-4 text-3xl font-extrabold text-neutral-900 dark:text-neutral-50 sm:text-4xl md:text-6xl"
+            className="mb-4 text-3xl font-extrabold font-typograph text-neutral-900 dark:text-neutral-50 sm:text-4xl md:text-6xl"
           >
-            Countdown to <span className="text-red-600">Durga Puja 2026</span>
+             <span className="text-red-600">Maa Aasche!</span>
           </motion.h2>
 
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="mx-auto mb-10 max-w-2xl text-base leading-relaxed text-neutral-700 dark:text-neutral-300 sm:text-lg"
+            className="mx-auto mb-10 max-w-2xl text-base leading-relaxed font-synonym text-neutral-700 dark:text-neutral-300 sm:text-lg"
           >
             The dhak is calling, the lights are coming alive, and
             Maa Durga is on her way. Get ready to explore the magic
@@ -289,7 +289,7 @@ const Home = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-           
+            viewport={{ once: true }}
           >
             <div className="text-red-500 text-4xl mb-4 flex items-center justify-center">
               <RiCompassDiscoverFill className='text-red-500 dark:text-white' />
@@ -309,6 +309,7 @@ const Home = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
           >
             <div className="text-4xl mb-4 text-center flex items-center justify-center">
               <FaLocationCrosshairs className='text-red-500 dark:text-white' />
@@ -327,6 +328,7 @@ const Home = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
           >
             <div className="text-red-500 text-4xl mb-4 flex items-center justify-center">
               <FaCarSide className='text-red-500 dark:text-white' />
@@ -345,6 +347,7 @@ const Home = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
           >
             <div className="text-red-500 text-4xl mb-4 flex items-center justify-center">
               <RiCameraAiLine className='text-red-500 dark:text-white' />

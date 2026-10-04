@@ -90,7 +90,7 @@ const Navbar = () => {
               <div key={link.name} className="relative group">
                 <Link
                   to={link.path}
-                  className={`font-medium ${location.pathname === link.path ? 'text-red-600' : 'text-gray-700'
+                  className={`font-display font-medium ${location.pathname === link.path ? 'text-red-600' : 'text-gray-700'
                     } hover:text-red-600 dark:text-white  transition-colors`}
                 >
                   {link.name}
@@ -103,7 +103,7 @@ const Navbar = () => {
                       <div key={sublink.name} className="relative group/sub">
                         <Link
                           to={sublink.path}
-                          className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-800"
+                          className="block px-4 py-2 text-sm font-synonym text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-800"
                         >
                           {sublink.name}
                         </Link>
@@ -115,7 +115,7 @@ const Navbar = () => {
                               <Link
                                 key={subsub.name}
                                 to={subsub.path}
-                                className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-800"
+                                className="block px-4 py-2 text-sm font-synonym text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-800"
                               >
                                 {subsub.name}
                               </Link>

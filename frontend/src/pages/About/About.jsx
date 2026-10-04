@@ -15,7 +15,7 @@ const About = () => {
       {/* Header */}
       <section className="relative py-20 px-8 md:px-16 lg:px-24 text-center bg-gradient-to-r from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900">
         <motion.h1
-          className="text-4xl md:text-5xl font-bold mb-4 text-neutral-800 dark:text-white italic"
+          className="text-4xl md:text-5xl font-display font-bold mb-4 text-neutral-800 dark:text-white italic"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -45,7 +45,7 @@ const About = () => {
           </div>
 
           <div className="space-y-6">
-            <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 italic">
+            <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 font-synonym font-medium">
               Bringing Kolkata’s Durga Puja Magic to Your Home: The Story of Praner Pujo
               There’s something truly special about Durga Puja in Kolkata—the vibrant colors,
               the intricate artistry of the pandals, and the deep sense of devotion that fills
@@ -54,7 +54,7 @@ const About = () => {
               is here to bring that magic right to your doorstep, no matter where you are in the world.
             </p>
 
-            <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 italic">
+            <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 font-synonym font-medium">
               What started as a simple passion project has blossomed into a full-fledged immersive experience.
               The founders of Praner Pujo wanted to share the grandeur of Kolkata’s iconic Durga Puja pandals
               beyond geographical boundaries. Their vision was to create a platform where devotees, art lovers,
@@ -62,7 +62,7 @@ const About = () => {
             </p>
 
             {/* This paragraph runs the full width, once the floated image has ended above it */}
-            <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 clear-left italic">
+            <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 clear-left font-synonym font-medium">
               Behind the scenes, a dedicated team works tirelessly to curate experiences that blend the richness of age-old
               customs with the possibilities of modern technology. The result is an accessible, immersive celebration that
               showcases the best of art, devotion, and cultural heritage. Whether you’re admiring the stunning artistry of
@@ -70,7 +70,7 @@ const About = () => {
               unique way to connect with the festival’s heart and soul.
             </p>
 
-            <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 italic">
+            <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 font-synonym font-medium">
               It’s this seamless fusion of tradition and innovation that makes Praner Pujo stand out—not
               just a digital event, but a heartfelt celebration that honors the essence of Durga Puja.
               So, whether you're near or far, this platform invites you to experience the joy,
@@ -87,7 +87,7 @@ const About = () => {
 
       {/* Statistical Attributes */}
       <section className="py-16 bg-neutral-100 dark:bg-neutral-900 px-8 md:px-16 lg:px-24 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-10">
+        <h2 className="text-3xl md:text-4xl font-display font-bold text-black dark:text-white mb-10">
           Statistical Attributes of <br />
           <span className="text-red-600">Durga Puja Art Kolkata</span>
         </h2>

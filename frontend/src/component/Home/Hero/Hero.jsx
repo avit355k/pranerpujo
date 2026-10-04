@@ -52,7 +52,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.8 }}
-            className="text-2xl md:text-5xl font-light text-neutral-100 drop-shadow-lg max-w-3xl"
+            className="text-2xl md:text-5xl font-typograph font-light text-neutral-100 drop-shadow-lg max-w-3xl"
           >
             {texts[index]}
           </motion.p>
