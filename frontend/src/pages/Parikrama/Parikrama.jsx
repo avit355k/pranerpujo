@@ -73,7 +73,7 @@ const Parikrama = () => {
   };
 
   return (
-    <section className="mx-auto px-4 py-6 bg-white dark:bg-black transition-colors duration-300">
+    <section className="mx-auto px-4 py-20 bg-white dark:bg-black transition-colors duration-300">
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Sidebar */}
         <aside className="w-full lg:w-72 bg-gradient-to-b from-gray-100 to-gray-200 dark:from-neutral-900 dark:to-neutral-800 rounded-2xl shadow-lg p-6 h-fit lg:sticky top-20">

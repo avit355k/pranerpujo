@@ -79,16 +79,16 @@ const Home = () => {
         >
           <h1 className="text-3xl font-display font-bold text-red-600">About Us</h1>
 
-          <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 font-synonym">
-            <b>Praner Pujo</b> is a pioneering immersive and interactive user-friendly application.
+          <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 font-synonym italic">
+            Praner Pujo is a pioneering immersive and interactive user-friendly application.
             Simply look for the arrows and tap or click to wander around, experiencing the pandal as
             if you were truly there. Enjoy the wonder of exploring each pandal right from your screen!
           </p>
-          <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 font-synonym">
+          <p className="leading-relaxed text-neutral-600 dark:text-neutral-400 font-synonym italic">
             Experience the finest installation art (pandals) of
-            <b> Kolkata's Durga Puja</b>—recognized as an
-            <b> 'Intangible Cultural Heritage' by UNESCO</b>—directly from your
-            smart device. The app is <b>completely FREE</b> and compatible with
+            Kolkata's Durga Puja—recognized as an
+            'Intangible Cultural Heritage' by UNESCO—directly from your
+            smart device. The app is completely FREE and compatible with
             all modern browsers, making the magic of Durga Puja accessible
             anytime, anywhere.
           </p>
@@ -157,7 +157,7 @@ const Home = () => {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="mb-4 text-3xl font-extrabold font-typograph text-neutral-900 dark:text-neutral-50 sm:text-4xl md:text-6xl"
           >
-             <span className="text-red-600">Maa Aasche!</span>
+            <span className="text-red-600">Maa Aasche!</span>
           </motion.h2>
 
           <motion.p
@@ -277,7 +277,7 @@ const Home = () => {
       <Featured />
 
       <div className='py-10 bg-white dark:bg-black transition-colors duration-300'>
-        <h1 className='text-center text-3xl font-bold text-red-600'>Why choose PranerPujo ?</h1>
+        <h1 className='text-center text-3xl font-bold text-red-600 font-display'>Why choose PranerPujo ?</h1>
         <p className='text-center leading-relaxed text-neutral-600 dark:text-neutral-400 mb-10'>
           Everything you need to make your Durga Puja experience unforgettable
         </p>

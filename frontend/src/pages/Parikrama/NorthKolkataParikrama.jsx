@@ -11,7 +11,7 @@ const NorthKolkataParikrama = () => {
   const [page, setPage] = useState(1);
   const itemsPerPage = 8;
 
-  // ✅ Fetch pandels by zone
+  // Fetch pandels by zone
   useEffect(() => {
     const fetchPandels = async () => {
       try {
@@ -39,11 +39,11 @@ const NorthKolkataParikrama = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // ✅ Paginate pandels
+  //  Paginate pandels
   const paginatedPandels = pandels.slice((page - 1) * itemsPerPage, page * itemsPerPage);
 
   return (
-    <div className="px-3 sm:px-6 lg:px-10 py-6 bg-white dark:bg-black min-h-screen transition-colors duration-300">
+    <div className="px-3 sm:px-6 lg:px-10 py-20 bg-white dark:bg-black min-h-screen transition-colors duration-300">
       
       {/* Header */}
       <div className="px-4 py-3 bg-red-600 rounded-lg shadow-md mb-6 lg:mb-10">

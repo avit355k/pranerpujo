@@ -43,7 +43,7 @@ const Featured = () => {
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="text-3xl font-bold text-red-600"
+          className="text-3xl font-display font-bold text-red-600"
         >
           Popular Pujas
         </motion.h1>
@@ -56,9 +56,19 @@ const Featured = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
         >
-          {[1, 2, 3].map((item) => (
-            <SkeletonCard key={item} />
-          ))}
+          <div>
+            <SkeletonCard />
+          </div>
+
+          {/* Card 2: Visible on sm screens and up */}
+          <div className="hidden sm:block">
+            <SkeletonCard />
+          </div>
+
+          {/* Card 3: Visible on lg screens and up */}
+          <div className="hidden lg:block">
+            <SkeletonCard />
+          </div>
         </motion.div>
       ) : heritagePandels.length === 0 ? (
         <p className="text-center text-gray-500">No Popular pujas found.</p>

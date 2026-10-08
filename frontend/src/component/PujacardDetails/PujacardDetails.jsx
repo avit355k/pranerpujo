@@ -86,7 +86,7 @@ const PujacardDetails = () => {
     return <div className="text-center py-8 text-red-500">No data found</div>;
 
   return (
-    <section className="px-0 py-0 bg-white dark:bg-black transition-colors duration-300">
+    <section className="px-0 py-18 bg-white dark:bg-black transition-colors duration-300">
       {/* Header Section */}
       <header className="flex flex-col sm:flex-row items-center sm:items-start gap-6 bg-gray-50 dark:bg-neutral-900 p-6 shadow-sm">
         <div className="flex-shrink-0">

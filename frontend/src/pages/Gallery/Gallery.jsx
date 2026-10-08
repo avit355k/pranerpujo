@@ -39,7 +39,7 @@ const Gallery = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
   return (
-    <div className="p-4 bg-white dark:bg-black min-h-screen">
+    <div className="px-4 py-20 bg-white dark:bg-black min-h-screen">
       {/* Header */}
       <div className="mb-8">
         <h1 className="flex items-center gap-2 text-2xl lg:text-3xl font-bold text-red-600 mb-3">

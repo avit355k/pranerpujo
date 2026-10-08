@@ -66,8 +66,8 @@ const Artists = () => {
     );
 
   return (
-    <section className="py-6 px-4 md:px-12 lg:px-16 bg-neutral-50 dark:bg-neutral-950 min-h-screen">
-      <h1 className="text-4xl font-bold  text-red-600 mb-10">
+    <section className="px-6 py-20 md:px-12 lg:px-16 bg-neutral-50 dark:bg-neutral-950 min-h-screen">
+      <h1 className="text-4xl font-bold text-center text-red-600 mb-10">
         Artist Collection
       </h1>
 

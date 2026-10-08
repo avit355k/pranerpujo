@@ -11,7 +11,7 @@ const CommitteeVideoGallery = () => {
   const [videos, setVideos] = useState({});
   const years = [2025, 2024, 2023]; // Years to display
 
-  // ✅ Fetch Pandel Details
+  //  Fetch Pandel Details
   useEffect(() => {
     const fetchPandel = async () => {
       try {
@@ -24,7 +24,7 @@ const CommitteeVideoGallery = () => {
     if (id) fetchPandel();
   }, [id]);
 
-  // ✅ Fetch videos for all defined years
+  // Fetch videos for all defined years
   useEffect(() => {
     const fetchVideos = async () => {
       const results = {};
@@ -51,7 +51,7 @@ const CommitteeVideoGallery = () => {
     );
 
   return (
-    <section className="px-4 sm:px-8 py-10 bg-white dark:bg-black transition-colors duration-300 min-h-screen">
+    <section className="px-4 sm:px-8 py-20 bg-white dark:bg-black transition-colors duration-300 min-h-screen">
       {/* Header Section */}
       <header className="flex flex-col sm:flex-row items-center sm:items-start gap-6 bg-gray-50 dark:bg-neutral-900 p-6 shadow-sm rounded-lg">
         <img

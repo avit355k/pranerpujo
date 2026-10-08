@@ -56,7 +56,7 @@ const CommiteePhotoGallery = () => {
     return <p className="text-center text-red-500 py-8">Pandel not found.</p>;
 
   return (
-    <section className="px-0 py-0 bg-white dark:bg-black transition-colors duration-300">
+    <section className="px-0 py-18 bg-white dark:bg-black transition-colors duration-300">
       {/* Header Section */}
       <div className="mb-8">
         <header className="flex flex-col sm:flex-row items-center sm:items-start gap-6 bg-gray-50 dark:bg-black p-6 shadow-sm">

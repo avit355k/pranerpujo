@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from "motion/react"
 import videoBg from '../../../assets/video/Durga Puja Art.mp4'
 
-import { IoVolumeMediumOutline, IoVolumeMuteOutline } from "react-icons/io5";
+
 
 const Hero = () => {
   const texts = [
@@ -21,11 +21,6 @@ const Hero = () => {
     return () => clearInterval(interval)
   }, [texts.length]);
 
-  const [isMuted, setIsMuted] = useState(true);
-  const toggleSound = async () => {
-    setIsMuted((prev) => !prev)
-  };
-
   return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* Local Video Background */}
@@ -34,7 +29,7 @@ const Hero = () => {
           className="absolute top-0 left-0 w-full h-full object-cover"
           src={videoBg}
           autoPlay
-          muted={isMuted}
+          muted
           loop
           playsInline
         />
@@ -62,12 +57,6 @@ const Hero = () => {
       {/* Bottom gradient */}
       <div className="absolute bottom-0 left-0 w-full h-10 bg-gradient-to-t from-black/90 to-transparent "></div>
 
-      <button
-        onClick={toggleSound}
-        className="absolute z-10 bottom-2 right-2   text-white  rounded-full backdrop-blur-md cursor-pointer p-2 transition-all duration-300 hover:scale-110 hover:bg-black/30  "
-      >
-        {isMuted ? <IoVolumeMuteOutline /> : <IoVolumeMediumOutline />}
-      </button>
     </section>
   )
 }

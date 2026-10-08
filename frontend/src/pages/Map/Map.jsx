@@ -311,7 +311,7 @@ const Map = () => {
 
   return (
     <section
-      className="bg-white dark:bg-black min-h-[90vh] flex flex-col lg:flex-row gap-6 p-6 transition-colors duration-300 relative"
+      className="bg-white dark:bg-black min-h-[90vh] flex flex-col lg:flex-row gap-6 px-6 py-20 transition-colors duration-300 relative"
       style={{ zIndex: 1 }}
     >
       {/* === Sidebar === */}

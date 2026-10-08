@@ -39,7 +39,7 @@ const pujaSchedule = [
 
 const Schedule = () => {
   return (
-    <section className="py-16 px-8 md:px-16 lg:px-24 bg-neutral-50 dark:bg-neutral-950 min-h-screen">
+    <section className="py-20 px-8 md:px-16 lg:px-24 bg-neutral-50 dark:bg-neutral-950 min-h-screen">
       <motion.h1
         className="text-4xl font-bold text-center text-red-600 mb-12"
         initial={{ opacity: 0, y: -20 }}

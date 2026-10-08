@@ -76,7 +76,7 @@ useEffect(() => {
     return <p className="text-center text-red-500 py-8">Loading pandel details...</p>;
 
   return (
-    <section className="px-4 py-6 bg-white dark:bg-black transition-colors duration-300">
+    <section className="px-4 py-20 bg-white dark:bg-black transition-colors duration-300">
       {/* Header Section */}
       <div className="mb-8">
         <header className="flex flex-col sm:flex-row items-center sm:items-start gap-6 bg-gray-50 dark:bg-black p-6 shadow-sm">
