@@ -10,7 +10,7 @@ import { RiCameraAiLine, RiCompassDiscoverFill } from "react-icons/ri";
 import { FaLocationCrosshairs, FaCarSide } from "react-icons/fa6";
 
 const FESTIVAL_DAYS = [
-  { label: "Mahalaya", greeting: "Subho Mahalaya 🙏🏻", date: "2026-10-10", display: "10 October 2026" },
+  { label: "Mahalaya", greeting: "Subho Mahalaya 🪷", date: "2026-10-10", display: "10 October 2026" },
   { label: "Maha Panchami", greeting: "Maha Panchami 🪷", date: "2026-10-16", display: "16 October 2026" },
   { label: "Maha Shashthi", greeting: "Maha Shashthi 🪷", date: "2026-10-17", display: "17 October 2026" },
   { label: "Maha Saptami", greeting: "Maha Saptami 🪷", date: "2026-10-18", display: "18 October 2026" },
@@ -191,7 +191,7 @@ const Home = () => {
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mx-auto mb-6 max-w-md rounded-2xl border border-red-600/40 bg-red-600/10 px-6 py-4 text-xl font-bold text-red-600"
+                  className="mx-auto mb-6 max-w-md rounded-2xl border border-red-600/40 bg-red-600/10 px-6 py-4 text-3xl font-typograph font-bold tracking-widest text-red-600"
                 >
                   {todayFestival.greeting}
                 </motion.div>
