@@ -151,14 +151,14 @@ const Home = () => {
             The Celebration Awaits
           </motion.span>
 
-          <motion.h2
+          {/* <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="mb-4 text-3xl font-extrabold font-typograph text-neutral-900 dark:text-neutral-50 sm:text-4xl md:text-6xl"
           >
             <span className="text-red-600">Maa Aasche!</span>
-          </motion.h2>
+          </motion.h2> */}
 
           <motion.p
             initial={{ opacity: 0 }}
@@ -176,12 +176,12 @@ const Home = () => {
               key={todayFestival?.date ?? "after"}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="rounded-2xl border border-neutral-300/80 dark:border-neutral-700/80 bg-white/70 dark:bg-neutral-800/60 px-6 py-8 text-2xl sm:text-4xl font-bold text-neutral-900 dark:text-white backdrop-blur-md"
+              className="text-2xl sm:text-4xl md:text-6xl font-extrabold font-typograph text-red-600"
             >
               {todayFestival
                 ? todayFestival.greeting
                 : isAfterPuja
-                  ? "Shubho Bijoya! See you next year 🌺"
+                  ? "Shubho Bijoya!🪷"
                   : "Shubho Durga Puja! 🪷"}
             </motion.div>
           ) : (
@@ -235,6 +235,7 @@ const Home = () => {
               </div>
             </>
           )}
+
 
           <motion.div
             initial={{ opacity: 0, y: 15 }}
