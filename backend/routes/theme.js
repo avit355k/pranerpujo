@@ -21,6 +21,17 @@ const upload = multer({ storage });
 
 //get file extension 
 const getExtension = (filename) => filename.split(".").pop();
+// sanitize title for use in file names
+const safeName = (s) => String(s).replace(/[^a-zA-Z0-9_-]/g, "_");
+
+async function uploadImage(file, fileName, folder) {
+  const response = await imagekit.upload({
+    file: file.buffer,
+    fileName,
+    folder,
+  });
+  return response.url;
+}
 
 // Helper: Check if an image exists in ImageKit
 async function checkIfImageExists(fileName, folder = "/pandels") {
@@ -29,7 +40,8 @@ async function checkIfImageExists(fileName, folder = "/pandels") {
 
   try {
     const files = await imagekit.listFiles({
-      searchQuery: `name="${fileName}" AND folder="${folder}"`,
+      path: folder,
+      searchQuery: `name="${fileName}"`,
       limit: 1,
     });
 
@@ -48,18 +60,27 @@ async function checkIfImageExists(fileName, folder = "/pandels") {
 // Helper: Delete ImageKit file by URL
 async function deleteImageByUrl(url) {
   try {
-    const parts = url.split("/"); // Extract file name from URL
-    const fileName = parts[parts.length - 1];
-    const folder = "/" + parts[parts.length - 2];
+    // Strip the endpoint, query string, and decode: gives "/pandels/gallery/file.webp"
+    const endpoint = process.env.IMAGEKIT_URL_ENDPOINT.replace(/\/$/, "");
+    const filePath = decodeURIComponent(
+      url.replace(endpoint, "").split("?")[0]
+    );
+
+    const fileName = filePath.split("/").pop();
+    const folder = filePath.substring(0, filePath.lastIndexOf("/")) || "/";
 
     const files = await imagekit.listFiles({
-      searchQuery: `name="${fileName}" AND folder="${folder}"`,
+      path: folder,
+      searchQuery: `name="${fileName}"`,
       limit: 1,
     });
 
     if (files.length > 0) {
       await imagekit.deleteFile(files[0].fileId);
-      console.log(` Deleted from ImageKit: ${fileName}`);
+      uploadedImageCache.delete(`${folder}/${fileName}`); // keep cache in sync
+      console.log(`Deleted from ImageKit: ${filePath}`);
+    } else {
+      console.warn(`File not found in ImageKit: ${filePath}`);
     }
   } catch (err) {
     console.error(" Failed to delete image:", err.message);
@@ -67,9 +88,7 @@ async function deleteImageByUrl(url) {
 }
 
 //create theme
-
-router.post(
-  "/create",
+router.post("/create",
   upload.fields([
     { name: "mainImageFile", maxCount: 1 },
     { name: "galleryFiles", maxCount: 10 },
@@ -106,7 +125,7 @@ router.post(
       if (req.files["mainImageFile"]?.[0]) {
         const file = req.files["mainImageFile"][0];
         const ext = getExtension(file.originalname);
-        const fileName = `${title}-${year}-main.${ext}`;
+        const fileName = `${safeName(title)}-${numericYear}-main.${ext}`;
 
         mainImageUrl =
           (await checkIfImageExists(fileName, "/pandels")) ||
@@ -125,7 +144,7 @@ router.post(
       if (req.files["galleryFiles"]?.length > 0) {
         const uploadPromises = req.files["galleryFiles"].map(async (file, index) => {
           const ext = getExtension(file.originalname);
-          const fileName = `${title}-${year}-gallery-${index + 1}.${ext}`;
+          const fileName = `${safeName(title)}-${numericYear}-gallery-${index + 1}.${ext}`;
 
           const existingUrl = await checkIfImageExists(fileName, "/pandels/gallery");
           if (existingUrl) return existingUrl;
@@ -236,10 +255,27 @@ router.get("/filter", async (req, res) => {
   }
 });
 
-//update theme
+// GET THEMES by Pandel + Year
+router.get("/pandel/:pandelId/year/:year", async (req, res) => {
+  try {
+    const { pandelId, year } = req.params;
+    const numericYear = parseInt(year);
 
-router.put(
-  "/:id",
+    const themes = await Theme.find({ pandel: pandelId, year: numericYear })
+      .populate("pandel", "name zone logo address")
+      .populate("artists.artist", "name role image");
+
+    if (!themes.length)
+      return res.status(404).json({ message: "No themes found for this year" });
+
+    res.status(200).json(themes);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
+  }
+});
+
+//update theme
+router.put("/:id",
   upload.fields([
     { name: "mainImageFile", maxCount: 1 },
     { name: "galleryFiles", maxCount: 10 },
@@ -251,62 +287,51 @@ router.put(
 
       const { title, concept, year, pandel, artists, youtubeLink, existingGallery } = req.body;
 
+      const finalTitle = title || theme.title;
+      const finalYear = year ? parseInt(year) : theme.year;
+
+      // Old files are collected here and deleted only AFTER the DB save succeeds
+      const urlsToDelete = [];
+
+      // ---- Main image ----
       let mainImageUrl = theme.mainImage;
-
-      //  Replace main image
-      if (req.files["mainImageFile"]?.[0]) {
-        // Delete old image first
-        if (theme.mainImage) await deleteImageByUrl(theme.mainImage);
-
+      if (req.files?.["mainImageFile"]?.[0]) {
         const file = req.files["mainImageFile"][0];
         const ext = getExtension(file.originalname);
-        const fileName = `${title}-${year}-main.${ext}`;
+        const fileName = `${safeName(finalTitle)}-${finalYear}-main.${ext}`;
 
-        mainImageUrl =
-          (await checkIfImageExists(fileName, "/pandels")) ||
-          (await imagekit.upload({
-            file: file.buffer,
-            fileName,
-            folder: "/pandels",
-          }).then((r) => {
-            uploadedImageCache.set(`/pandels/${fileName}`, r.url);
-            return r.url;
-          }));
+        mainImageUrl = await uploadImage(file, fileName, "/pandels"); // upload new first
+        if (theme.mainImage) urlsToDelete.push(theme.mainImage); // then retire the old one
       }
 
-      //  Update gallery
-      let newGalleryUrls = existingGallery ? JSON.parse(existingGallery) : [];
+      // ---- Gallery ----
+      // existingGallery = JSON array of old URLs the user chose to KEEP.
+      // If it is not sent at all, keep everything that is already saved.
+      const keptGallery =
+        existingGallery !== undefined ? JSON.parse(existingGallery) : [...theme.gallery];
 
-      if (req.files["galleryFiles"]?.length > 0) {
-        // Delete old gallery before uploading new
-        for (const oldUrl of theme.gallery) {
-          if (!newGalleryUrls.includes(oldUrl)) await deleteImageByUrl(oldUrl);
-        }
-
-        const uploadPromises = req.files["galleryFiles"].map(async (file, index) => {
-          const ext = getExtension(file.originalname);
-          const fileName = `${title}-${year}-gallery-${index + 1}.${ext}`;
-
-          const existingUrl = await checkIfImageExists(fileName, "/pandels/gallery");
-          if (existingUrl) return existingUrl;
-
-          const uploadResponse = await imagekit.upload({
-            file: file.buffer,
-            fileName,
-            folder: "/pandels/gallery",
-          });
-          uploadedImageCache.set(`/pandels/gallery/${fileName}`, uploadResponse.url);
-          return uploadResponse.url;
-        });
-
-        const uploaded = await Promise.all(uploadPromises);
-        newGalleryUrls = [...newGalleryUrls, ...uploaded];
+      // Old images that are no longer kept get deleted (even if no new files were uploaded)
+      for (const oldUrl of theme.gallery) {
+        if (!keptGallery.includes(oldUrl)) urlsToDelete.push(oldUrl);
       }
 
-      //  Update DB fields
-      theme.title = title || theme.title;
+      let newGalleryUrls = [...keptGallery];
+      if (req.files?.["galleryFiles"]?.length > 0) {
+        const startIndex = keptGallery.length;
+        const uploaded = await Promise.all(
+          req.files["galleryFiles"].map((file, index) => {
+            const ext = getExtension(file.originalname);
+            const fileName = `${safeName(finalTitle)}-${finalYear}-gallery-${startIndex + index + 1}.${ext}`;
+            return uploadImage(file, fileName, "/pandels/gallery");
+          })
+        );
+        newGalleryUrls = [...keptGallery, ...uploaded];
+      }
+
+      // ---- Update DB fields ----
+      theme.title = finalTitle;
       theme.concept = concept || theme.concept;
-      theme.year = year || theme.year;
+      theme.year = finalYear;
       theme.pandel = pandel || theme.pandel;
       theme.mainImage = mainImageUrl;
       theme.gallery = newGalleryUrls;
@@ -314,6 +339,10 @@ router.put(
       theme.artists = artists ? JSON.parse(artists) : theme.artists;
 
       await theme.save();
+
+      // DB is saved, now it is safe to remove the replaced/removed images
+      await Promise.all(urlsToDelete.map((url) => deleteImageByUrl(url)));
+
       res.status(200).json({ message: "Theme updated successfully", theme });
     } catch (error) {
       console.error("Error updating theme:", error);
@@ -337,26 +366,6 @@ router.delete("/:id", async (req, res) => {
     res.status(200).json({ message: "Theme and associated images deleted successfully" });
   } catch (error) {
     console.error("Error deleting theme:", error);
-    res.status(500).json({ message: "Internal Server Error", error: error.message });
-  }
-});
-
-// GET THEMES by Pandel + Year
-
-router.get("/pandel/:pandelId/year/:year", async (req, res) => {
-  try {
-    const { pandelId, year } = req.params;
-    const numericYear = parseInt(year);
-
-    const themes = await Theme.find({ pandel: pandelId, year: numericYear })
-      .populate("pandel", "name zone logo address")
-      .populate("artists.artist", "name role image");
-
-    if (!themes.length)
-      return res.status(404).json({ message: "No themes found for this year" });
-
-    res.status(200).json(themes);
-  } catch (error) {
     res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 });

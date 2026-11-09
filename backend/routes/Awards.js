@@ -3,12 +3,12 @@ const router = express.Router();
 const Award = require('../model/awards');
 const Pandel = require('../model/pandels');
 
-// ===============================
-// 1️⃣  Create New Award
-// ===============================
+
+//  Create New Award
+
 router.post('/', async (req, res) => {
   try {
-    const { awardName, logo, winners } = req.body; 
+    const { awardName, logo, winners } = req.body;
 
     const newAward = new Award({ awardName, logo, winners });
     await newAward.save();
@@ -19,9 +19,9 @@ router.post('/', async (req, res) => {
   }
 });
 
-// ===============================
-// 2️⃣  Get All Awards (with pandel details)
-// ===============================
+
+// Get All Awards (with pandel details)
+
 router.get('/', async (req, res) => {
   try {
     const awards = await Award.find().populate('winners.pandels');
@@ -31,9 +31,9 @@ router.get('/', async (req, res) => {
   }
 });
 
-// ===============================
-// 3️⃣  Get Single Award by ID
-// ===============================
+
+//  Get Single Award by ID
+
 router.get('/:id', async (req, res) => {
   try {
     const award = await Award.findById(req.params.id).populate('winners.pandels');
@@ -44,9 +44,8 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// ===============================
-// 4️⃣  Update Award
-// ===============================
+//  Update Award
+
 router.put('/:id', async (req, res) => {
   try {
     const updatedAward = await Award.findByIdAndUpdate(req.params.id, req.body, {
@@ -61,9 +60,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// ===============================
-// 5️⃣  Delete Award
-// ===============================
+//  Delete Award
 router.delete('/:id', async (req, res) => {
   try {
     const deleted = await Award.findByIdAndDelete(req.params.id);
@@ -74,9 +71,9 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-// ===============================
-// 6️⃣  Add/Update Year-wise Pandel(s)
-// ===============================
+
+//   Add/Update Year-wise Pandel(s)
+
 // Example body:
 // {
 //   "year": 2024,
@@ -113,9 +110,9 @@ router.post('/:id/yearwise', async (req, res) => {
     res.status(500).json({ error: 'Failed to update yearwise pandels', details: error.message });
   }
 });
-// ===============================
+
 //  Get Pandels for a Specific Award and Year
-// ===============================
+
 // Example: GET /api/awards/:id/year/2024
 router.get('/:id/year/:year', async (req, res) => {
   try {
@@ -145,9 +142,9 @@ router.get('/:id/year/:year', async (req, res) => {
   }
 });
 
-// ===============================
-// 7️⃣ Update a Specific Winner (Year + Pandels)
-// ===============================
+
+// Update a Specific Winner (Year + Pandels)
+
 router.put("/:awardId/winner/:winnerId", async (req, res) => {
   try {
     const { awardId, winnerId } = req.params;
@@ -180,9 +177,9 @@ router.put("/:awardId/winner/:winnerId", async (req, res) => {
     });
   }
 });
-// ===============================
-// 8️⃣ Delete a Specific Winner
-// ===============================
+
+//Delete a Specific Winner
+
 router.delete("/:awardId/winner/:winnerId", async (req, res) => {
   try {
     const { awardId, winnerId } = req.params;

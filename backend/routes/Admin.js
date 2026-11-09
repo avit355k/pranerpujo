@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const Admin = require("../model/admin");
 
-// ✅ Load environment variable
+// Load environment variable
 const JWT_SECRET = process.env.JWT_SECRET;
 
 // -------------------- ADMIN SIGNUP --------------------

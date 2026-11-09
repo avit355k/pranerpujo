@@ -31,7 +31,7 @@ async function getFileIdByUrl(url) {
     }
 }
 
-// ================= Upload Gallery =================
+//  Upload Gallery
 router.post("/upload", upload.array("photos"), async (req, res) => {
     try {
         const { pandel, year, video } = req.body;
@@ -81,7 +81,7 @@ router.post("/upload", upload.array("photos"), async (req, res) => {
     }
 });
 
-// ================= Update Gallery =================
+//  Update Gallery
 router.put("/update/:id", upload.array("newPhotos"), async (req, res) => {
     try {
         const { id } = req.params;
@@ -135,7 +135,7 @@ router.put("/update/:id", upload.array("newPhotos"), async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
-// ================= Get All Galleries =================
+// Get All Galleries
 router.get("/all", async (req, res) => {
     try {
         const galleries = await Gallery.find()
@@ -154,7 +154,7 @@ router.get("/all", async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
-// ================= Delete Gallery =================
+// Delete Gallery 
 router.delete("/delete/:id", async (req, res) => {
     try {
         const { id } = req.params;
