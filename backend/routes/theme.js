@@ -357,7 +357,7 @@ router.delete("/:id", async (req, res) => {
     const theme = await Theme.findByIdAndDelete(req.params.id);
     if (!theme) return res.status(404).json({ message: "Theme not found" });
 
-    // 🧹 Clean up images
+    // Clean up images
     if (theme.mainImage) await deleteImageByUrl(theme.mainImage);
     if (theme.gallery?.length > 0) {
       await Promise.all(theme.gallery.map((url) => deleteImageByUrl(url)));

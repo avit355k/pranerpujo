@@ -4,13 +4,14 @@ import { FiSearch } from "react-icons/fi";
 import { LightMode, DarkMode } from "@mui/icons-material";
 import axios from "axios";
 import { API } from "../../services/api";
+import { showSuccess } from './../../utils/toast';
 
 const Navbar = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [adminName, setAdminName] = useState("");
   const dropdownRef = useRef(null);
-  const navigate = useNavigate(); // ✅ define navigate
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -32,7 +33,7 @@ const Navbar = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        setAdminName(res.data.name); // ✅ store name from backend
+        setAdminName(res.data.name); 
       } catch (error) {
         console.error("Error fetching admin profile:", error);
         // optional: handle token expiry
@@ -57,12 +58,13 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // ✅ Logout function
+  // Logout function
   const handleLogout = () => {
     localStorage.removeItem("adminToken");
     localStorage.removeItem("adminInfo");
     setDropdownOpen(false);
-    navigate("/admin/login"); // ✅ now works
+    showSuccess("Log Out successfully!");
+    navigate("/admin/login"); 
   };
 
   return (

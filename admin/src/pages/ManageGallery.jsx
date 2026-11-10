@@ -2,10 +2,10 @@ import React, { useEffect, useState, useCallback, useMemo } from "react";
 import axios from "axios";
 import { API } from "../services/api";
 import EditGallery from "../component/Gallery/EditGallery";
+import { showError, showSuccess } from "../utils/toast";
 
-// ==========================
+
 // MEMOIZED ROW COMPONENT
-// ==========================
 const GalleryRow = React.memo(({ gallery, index, openEditModal, handleDelete }) => {
   return (
     <tr className="hover:bg-gray-50 dark:hover:bg-neutral-800 transition-colors">
@@ -85,9 +85,7 @@ const ManageGallery = () => {
   const [search, setSearch] = useState("");
   const [yearFilter, setYearFilter] = useState("");
 
-  // ==========================
   // Fetch Galleries
-  // ==========================
   const fetchGalleries = useCallback(async () => {
     try {
       setLoading(true);
@@ -104,25 +102,22 @@ const ManageGallery = () => {
     fetchGalleries();
   }, [fetchGalleries]);
 
-  // ==========================
+
   // DELETE GALLERY
-  // ==========================
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this gallery?")) return;
 
     try {
-      await axios.delete(`${API}/api/gallery/${id}`);
+      await axios.delete(`${API}/api/gallery/delete/${id}`);
       setGalleries((prev) => prev.filter((g) => g._id !== id));
-      alert("Gallery deleted successfully!");
+      showSuccess("Gallery deleted successfully!");
     } catch (err) {
       console.error("Error deleting gallery:", err);
-      alert("Failed to delete gallery.");
+      showError(err.response?.data?.error || "Failed to delete gallery.");
     }
   };
 
-  // ==========================
   // FILTERED LIST
-  // ==========================
   const filteredGalleries = useMemo(() => {
     return galleries.filter((g) => {
       const matchesSearch = g.pandel?.name
@@ -135,9 +130,7 @@ const ManageGallery = () => {
     });
   }, [galleries, search, yearFilter]);
 
-  // ==========================
   // Modal Handling
-  // ==========================
   const openEditModal = (gallery) => {
     setSelectedGallery(gallery);
     setEditModalOpen(true);
@@ -157,9 +150,7 @@ const ManageGallery = () => {
         Manage Galleries
       </h2>
 
-      {/* ==========================
-          SEARCH + FILTER UI
-      =========================== */}
+      {/* SEARCH + FILTER UI */}
       <div className="flex flex-col md:flex-row gap-4 mb-5">
         {/* Search Input */}
         <input

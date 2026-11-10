@@ -1,5 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
+import { Toaster } from "react-hot-toast";
+
 import Dashboard from "./pages/Dashboard";
 import AdminLayout from "./Layout/AdminLayout";
 import AddPandel from './pages/AddPandel';
@@ -20,6 +22,12 @@ import ManageAwards from './pages/ManageAwards';
 const App = () => {
   return (
     <BrowserRouter>
+
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+      />
+      
       <Routes>
         <Route path="/admin/login" element={<LogIn />} />
         <Route path="/admin/signup" element={<SignUp />} />
