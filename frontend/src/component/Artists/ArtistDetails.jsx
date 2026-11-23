@@ -38,7 +38,7 @@ const ArtistDetails = () => {
     );
 
   return (
-    <section className="py-8 px-8 md:px-16 lg:px-16 bg-neutral-50 dark:bg-neutral-950 min-h-screen">
+    <section className="py-20 px-8 md:px-16 lg:px-16 bg-neutral-50 dark:bg-neutral-950 min-h-screen">
       <Link
         to="/artists"
         className="inline-block mb-6 text-red-600 hover:underline"

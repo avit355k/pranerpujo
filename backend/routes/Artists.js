@@ -5,7 +5,7 @@ const Artist = require("../model/artists");
 const Pandel = require("../model/pandels");
 const Theme = require("../model/theme");
 
-// ✅ Create a new artist (name and role required)
+//  Create a new artist (name and role required)
 router.post("/create", async (req, res) => {
   try {
     const { name, role, bio, image } = req.body;
@@ -25,7 +25,7 @@ router.post("/create", async (req, res) => {
   }
 });
 
-// ✅ Get all artists
+//  Get all artists
 router.get("/", async (req, res) => {
   try {
     const artists = await Artist.find().sort({ name: 1 });
@@ -91,7 +91,7 @@ router.post("/:id/work", async (req, res) => {
       return res.status(400).json({ message: "Year, pandel, and theme are required" });
     }
 
-    // ✅ Validate ObjectId format
+    //  Validate ObjectId format
     if (!mongoose.Types.ObjectId.isValid(artistId)) {
       return res.status(400).json({ message: "Invalid artist ID" });
     }

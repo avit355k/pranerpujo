@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { API } from "../services/api";
+import { showError, showSuccess } from "../utils/toast";
 
 const initialFormData = {
   name: "",
@@ -94,7 +95,7 @@ const AddPandel = () => {
 
       if (logo) data.append("logo", logo);
 
-      // ✅ API call
+      //  API call
       const response = await axios.post(
         `${API}/api/pandel/create`,
         data,
@@ -103,7 +104,7 @@ const AddPandel = () => {
         }
       );
 
-      alert("✅ Pandel Added Successfully!");
+      alert(" Pandel Added Successfully!");
       console.log("Server Response:", response.data);
 
       // Reset the form
@@ -111,7 +112,7 @@ const AddPandel = () => {
       setLogo(null);
     } catch (error) {
       console.error("Error adding pandel:", error);
-      alert("❌ Failed to add pandel. Check console for details.");
+      alert(" Failed to add pandel. Check console for details.");
     } finally {
       setLoading(false);
     }

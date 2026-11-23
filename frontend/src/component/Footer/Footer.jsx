@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaFacebook, FaTwitter, FaInstagram, FaGithub } from "react-icons/fa";
+import Schedule from './../../pages/Schedule/Schedule';
 
 const FooterLink = ({ to, children }) => {
   return (
@@ -144,6 +145,7 @@ const Footer = () => {
           {/* INFORMATION */}
           <FooterColumn title="Information">
             <FooterLink to="/about">About</FooterLink>
+            <FooterLink to="/schedule">Schedule</FooterLink>
           </FooterColumn>
         </div>
 

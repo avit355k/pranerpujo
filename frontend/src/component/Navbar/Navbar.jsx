@@ -42,9 +42,10 @@ const navLinks = [
       { name: "Videos", path: "/gallery/videos" },
     ],
   },
+  {name: "Route Guide", path: "/route-guide"},
   { name: "Awards", path: "/awards" },
   { name: "Artist", path: "/artists" },
-  { name: "Schedule", path: "/schedule" },
+  
   { name: "About", path: "/about" },
 ];
 

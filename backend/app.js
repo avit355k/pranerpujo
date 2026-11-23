@@ -47,6 +47,10 @@ const directionRoutes = require('./routes/map');
 const adminRoutes = require('./routes/Admin');
 const dashboardRoutes = require('./routes/dashboard');
 const awardRoutes = require('./routes/Awards');
+const transitModeRoutes = require("./routes/mode.transist");
+const transitLineRoutes = require("./routes/line.transist");
+const stationRoutes = require("./routes/station.transist");
+const stationPandalRoutes = require("./routes/station-pandal.transist");
 
 app.use("/api/admin", adminRoutes);
 // Use Routes
@@ -57,9 +61,12 @@ app.use("/api/gallery", GalleryRoutes);
 app.use("/api/map", directionRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/awards", awardRoutes);
+app.use("/api/transit/modes", transitModeRoutes);
+app.use("/api/transit/lines", transitLineRoutes);
+app.use("/api/transit/stations", stationRoutes);
+app.use("/api/transit/station-pandels", stationPandalRoutes);
 
 // Server Start
-// Start Server
 app.listen(process.env.PORT, () => {
   console.log(`Server started on port ${process.env.PORT}`);
 });

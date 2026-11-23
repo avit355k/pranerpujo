@@ -24,6 +24,7 @@ import About from './pages/About/About';
 import Artists from './pages/Artists/Artists';
 import ArtistDetails from './component/Artists/ArtistDetails';
 import { MusicProvider } from './context/MusicContext'
+import RouteGuide from './pages/RouteGuide/RouteGuide'
 
 
 const App = () => {
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="/gallery/:id/:year/photos" exact={true} element={<YearWisePhotoGallery />} />
           <Route path="/gallery/videos" exact={true} element={<VideoGallery />} />
           <Route path="/gallery/:id/videos" exact={true} element={<CommitteeVideoGallery />} />
+          <Route path="/route-guide" exact={true} element={<RouteGuide />} />
           <Route path="/awards" exact={true} element={<Awards />} />
           <Route path="/artists" exact={true} element={<Artists />} />
           <Route path="/artists/:id" element={<ArtistDetails />} />

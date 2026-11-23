@@ -5,7 +5,6 @@ const Pandel = require('../model/pandels');
 
 
 //  Create New Award
-
 router.post('/', async (req, res) => {
   try {
     const { awardName, logo, winners } = req.body;
@@ -19,9 +18,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-
 // Get All Awards (with pandel details)
-
 router.get('/', async (req, res) => {
   try {
     const awards = await Award.find().populate('winners.pandels');
@@ -33,7 +30,6 @@ router.get('/', async (req, res) => {
 
 
 //  Get Single Award by ID
-
 router.get('/:id', async (req, res) => {
   try {
     const award = await Award.findById(req.params.id).populate('winners.pandels');
@@ -45,7 +41,6 @@ router.get('/:id', async (req, res) => {
 });
 
 //  Update Award
-
 router.put('/:id', async (req, res) => {
   try {
     const updatedAward = await Award.findByIdAndUpdate(req.params.id, req.body, {

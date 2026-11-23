@@ -18,6 +18,14 @@ import ProtectedRoute from './utils/ProtectedRoute';
 import Profile from './pages/Profile/Profile';
 import AddAwards from './pages/AddAwards';
 import ManageAwards from './pages/ManageAwards';
+import AddTransistMode from './pages/AddTransistMode';
+import ManageTransistMode from './pages/ManageTransistMode';
+import AddTransistLine from './pages/AddTransistLine';
+import ManageTransistLine from './pages/ManageTransistLine';
+import AddStation from './pages/AddStation';
+import ManageStation from './pages/ManageStation';
+import AddStationPandel from './pages/AddStationPandel';
+import ManageStationPandel from './pages/ManageStationPandel';
 
 const App = () => {
   return (
@@ -27,7 +35,7 @@ const App = () => {
         position="top-right"
         reverseOrder={false}
       />
-      
+
       <Routes>
         <Route path="/admin/login" element={<LogIn />} />
         <Route path="/admin/signup" element={<SignUp />} />
@@ -46,6 +54,14 @@ const App = () => {
           <Route path='/gallery/manage' element={<ManageGallery />} />
           <Route path='/awards/add' element={<AddAwards />} />
           <Route path='/awards/manage' element={<ManageAwards />} />
+          <Route path='/route-guide/transist-mode/add' element={<AddTransistMode />} />
+          <Route path='/route-guide/transist-mode/manage' element={<ManageTransistMode />} />
+          <Route path='/route-guide/transist-line/add' element={<AddTransistLine />} />
+          <Route path='/route-guide/transist-line/manage' element={<ManageTransistLine />} />
+          <Route path='/route-guide/station/add' element={<AddStation />} />
+          <Route path='/route-guide/station/manage' element={<ManageStation />} />
+          <Route path='/route-guide/station-pandels/add' element={<AddStationPandel />} />
+          <Route path='/route-guide/station-pandels/manage' element={<ManageStationPandel />} />
         </Route>
       </Routes>
     </BrowserRouter>
